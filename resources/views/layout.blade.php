@@ -54,6 +54,24 @@
         rel="stylesheet">
 
     <style>
+        section::before{
+            content:'';
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 200px;
+            background:linear-gradient(to top, #000000,transparent);
+            z-index : 1000;
+        }
+        section::after{
+            content:'';
+            position: absolute;
+            top: 100%;
+            width: 100%;
+            height: 200px;
+            background:linear-gradient(to bottom, #000000,transparent);
+            z-index : 1000;
+        }
         body{
             background-color: black;
             font-family: Poppins;
@@ -111,12 +129,12 @@
         }
 
         ::-webkit-scrollbar-thumb {
-            background: linear-gradient(360deg, #563176, #26397e, transparent);
+            background: linear-gradient(360deg, #111111, #A9A9A9, transparent);
             border-radius: 30px;
         }
 
         ::-webkit-scrollbar-track {
-            background: linear-gradient(360deg, #c8e9f0, #00a2e0, transparent);
+            background: linear-gradient(360deg, #fff, #D3D3D3, transparent);
         }
 
         html {
@@ -183,8 +201,6 @@
         radial-gradient(at ${getRandomPercent()}% ${getRandomPercent()}%, #c8e9f0 0px, transparent 50%),
         radial-gradient(at ${getRandomPercent()}% ${getRandomPercent()}%, #fffae4 0px, transparent 50%)
         `;
-    
-        container.style.background = gradient;
     </script>
 
     @yield('script')

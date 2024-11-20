@@ -2,150 +2,6 @@
 a{
     text-decoration: none;
 }
-section::before{
-    content:'';
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 200px;
-    background:linear-gradient(to top, #000000,transparent);
-    z-index : 1000;
-}
-section::after{
-    content:'';
-    position: absolute;
-    top: 100%;
-    width: 100%;
-    height: 200px;
-    background:linear-gradient(to bottom, #000000,transparent);
-    z-index : 1000;
-}
-/* carousel */
-.carousel{
-    height: 100vh;
-    width: 100%;
-    overflow: hidden;
-    position: relative;
-}
-.carousel .list .item{
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    inset: 0 0 0 0;
-}
-.carousel .list .item img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: brightness(50%);
-}
-.carousel .list .item .content{
-    position: absolute;
-    top: 20%;
-    width: 100%;
-    max-width: 80%;
-    left: 50%;
-    transform: translateX(-50%);
-    padding-right: 30%;
-    box-sizing: border-box;
-    color: #fff;
-    text-shadow: 0 5px 10px #0004;
-}
-.carousel .list .item .author{
-    font-weight: bold;
-    letter-spacing: 10px;
-}
-.carousel .list .item .title,
-.carousel .list .item .topic{
-    font-size: 5rem;
-    font-weight: bold;
-    line-height: 1.3em;
-}
-.carousel .list .item .topic{
-    color: #f1683a;
-}
-.carousel .list .item .buttons{
-    display: grid;
-    grid-template-columns: repeat(2, 130px);
-    grid-template-rows: 40px;
-    gap: 5px;
-    margin-top: 20px;
-}
-.carousel .list .item .buttons button{
-    border: none;
-    background-color: #eee;
-    letter-spacing: 3px;
-    font-family: Poppins;
-    font-weight: 500;
-}
-.carousel .list .item .buttons button:nth-child(2){
-    background-color: transparent;
-    border: 1px solid #fff;
-    color: #eee;
-}
-/* thumbail */
-.thumbnail{
-    position: absolute;
-    bottom: 50px;
-    left: 50%;
-    width: max-content;
-    z-index: 100;
-    display: flex;
-    gap: 20px;
-}
-.thumbnail .item{
-    width: 150px;
-    height: 220px;
-    flex-shrink: 0;
-    position: relative;
-}
-.thumbnail .item img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 20px;
-}
-.thumbnail .item .content{
-    color: #fff;
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    right: 10px;
-}
-.thumbnail .item .content .title{
-    font-weight: 500;
-}
-.thumbnail .item .content .description{
-    font-weight: 300;
-}
-/* arrows */
-.arrows{
-    position: absolute;
-    top: 80%;
-    right: 52%;
-    z-index: 100;
-    width: 300px;
-    max-width: 30%;
-    display: flex;
-    gap: 10px;
-    align-items: center;
-}
-.arrows button{
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: #eee4;
-    border: none;
-    color: #fff;
-    font-family: monospace;
-    font-weight: bold;
-    transition: .5s;
-}
-.arrows button:hover{
-    background-color: #fff;
-    color: #000;
-}
-
 /* animation */
 .carousel .list .item:nth-child(1){
     z-index: 1;
@@ -285,113 +141,113 @@ section::after{
 </style>
 <section>
     <!-- carousel -->
-    <div class="carousel">
+    <div class="carousel h-screen w-full overflow-hidden relative">
         <!-- list item -->
         <div class="list">
-            <div class="item">
-                <img src="{{asset('assets/burger.jpg')}}">
-                <div class="content">
-                    <div class="author">LUNDEV</div>
-                    <div class="title">DESIGN SLIDER</div>
-                    <div class="topic">ANIMAL</div>
+            <div class="item w-full h-full absolute">
+                <img src="{{asset('assets/burger.jpg')}}" class="w-full h-full object-cover filter brightness-[60%]">
+                <div class="content absolute top-1/4 w-full max-w-[80%] left-2/4 -translate-x-1/2 pr-[30%] box-border text-[#fff] [text-shadow:0_5px_10px_#0004]">
+                    <div class="author font-bold tracking-[10px]">LUNDEV</div>
+                    <div class="title text-[5rem] font-bold leading-[1.3em]">DESIGN SLIDER</div>
+                    <div class="topic text-[5rem] font-bold leading-[1.3em] text-[#f1683a]">BURGER</div>
                     <div class="des">
                         <!-- lorem 50 -->
                         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi, rem magnam nesciunt minima placeat, itaque eum neque officiis unde, eaque optio ratione aliquid assumenda facere ab et quasi ducimus aut doloribus non numquam. Explicabo, laboriosam nisi reprehenderit tempora at laborum natus unde. Ut, exercitationem eum aperiam illo illum laudantium?
                     </div>
-                    <div class="buttons">
-                        <button>SEE MORE</button>
-                        <button>SUBSCRIBE</button>
+                    <div class="buttons grid grid-cols-[repeat(2,_130px)] grid-rows-[40px] gap-[5px] mt-[20px]">
+                        <button class="border-[none] bg-[#eee] tracking-[3px] font-[Poppins] font-medium text-black">SEE MORE</button>
+                        <button class="border-[none] bg-[#eee] tracking-[3px] font-[Poppins] font-medium bg-transparent border-[1px] border-[solid] border-[#fff] text-[#eee]">SUBSCRIBE</button>
                     </div>
                 </div>
             </div>
-            <div class="item">
-                <img src="{{asset('assets/pizza.jpg')}}">
-                <div class="content">
-                    <div class="author">LUNDEV</div>
-                    <div class="title">DESIGN SLIDER</div>
-                    <div class="topic">ANIMAL</div>
+            <div class="item w-full h-full absolute">
+                <img src="{{asset('assets/pizza.jpg')}}" class="w-full h-full object-cover filter brightness-[60%]">
+                <div class="content absolute top-1/4 w-full max-w-[80%] left-2/4 -translate-x-1/2 pr-[30%] box-border text-[#fff] [text-shadow:0_5px_10px_#0004]">
+                    <div class="author font-bold tracking-[10px]">LUNDEV</div>
+                    <div class="title text-[5rem] font-bold leading-[1.3em]">DESIGN SLIDER</div>
+                    <div class="topic text-[5rem] font-bold leading-[1.3em] text-[#f1683a]">PIZZA</div>
                     <div class="des">
                         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi, rem magnam nesciunt minima placeat, itaque eum neque officiis unde, eaque optio ratione aliquid assumenda facere ab et quasi ducimus aut doloribus non numquam. Explicabo, laboriosam nisi reprehenderit tempora at laborum natus unde. Ut, exercitationem eum aperiam illo illum laudantium?
                     </div>
-                    <div class="buttons">
-                        <button>SEE MORE</button>
-                        <button>SUBSCRIBE</button>
+                    <div class="buttons grid grid-cols-[repeat(2,_130px)] grid-rows-[40px] gap-[5px] mt-[20px]">
+                        <button class="border-[none] bg-[#eee] tracking-[3px] font-[Poppins] font-medium text-black">SEE MORE</button>
+                        <button class="border-[none] bg-[#eee] tracking-[3px] font-[Poppins] font-medium bg-transparent border-[1px] border-[solid] border-[#fff] text-[#eee]">SUBSCRIBE</button>
                     </div>
                 </div>
             </div>
-            <div class="item">
-                <img src="{{asset('assets/pie.jpg')}}">
-                <div class="content">
-                    <div class="author">LUNDEV</div>
-                    <div class="title">DESIGN SLIDER</div>
-                    <div class="topic">ANIMAL</div>
+            <div class="item w-full h-full absolute">
+                <img src="{{asset('assets/pie.jpg')}}" class="w-full h-full object-cover filter brightness-[60%]">
+                <div class="content absolute top-1/4 w-full max-w-[80%] left-2/4 -translate-x-1/2 pr-[30%] box-border text-[#fff] [text-shadow:0_5px_10px_#0004]">
+                    <div class="author font-bold tracking-[10px]">LUNDEV</div>
+                    <div class="title text-[5rem] font-bold leading-[1.3em]">DESIGN SLIDER</div>
+                    <div class="topic text-[5rem] font-bold leading-[1.3em] text-[#f1683a]">PIE</div>
                     <div class="des">
                         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi, rem magnam nesciunt minima placeat, itaque eum neque officiis unde, eaque optio ratione aliquid assumenda facere ab et quasi ducimus aut doloribus non numquam. Explicabo, laboriosam nisi reprehenderit tempora at laborum natus unde. Ut, exercitationem eum aperiam illo illum laudantium?
                     </div>
-                    <div class="buttons">
-                        <button>SEE MORE</button>
-                        <button>SUBSCRIBE</button>
+                    <div class="buttons grid grid-cols-[repeat(2,_130px)] grid-rows-[40px] gap-[5px] mt-[20px]">
+                        <button class="border-[none] bg-[#eee] tracking-[3px] font-[Poppins] font-medium text-black">SEE MORE</button>
+                        <button class="border-[none] bg-[#eee] tracking-[3px] font-[Poppins] font-medium bg-transparent border-[1px] border-[solid] border-[#fff] text-[#eee]">SUBSCRIBE</button>
                     </div>
                 </div>
             </div>
-            <div class="item">
-                <img src="{{asset('assets/burger.jpg')}}">
-                <div class="content">
-                    <div class="author">LUNDEV</div>
-                    <div class="title">DESIGN SLIDER</div>
-                    <div class="topic">ANIMAL</div>
+            <div class="item w-full h-full absolute">
+                <img src="{{asset('assets/burger.jpg')}}" class="w-full h-full object-cover filter brightness-[60%]">
+                <div class="content absolute top-1/4 w-full max-w-[80%] left-2/4 -translate-x-1/2 pr-[30%] box-border text-[#fff] [text-shadow:0_5px_10px_#0004]">
+                    <div class="author font-bold tracking-[10px]">LUNDEV</div>
+                    <div class="title text-[5rem] font-bold leading-[1.3em]">DESIGN SLIDER</div>
+                    <div class="topic text-[5rem] font-bold leading-[1.3em] text-[#f1683a]">ANIMAL</div>
                     <div class="des">
                         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi, rem magnam nesciunt minima placeat, itaque eum neque officiis unde, eaque optio ratione aliquid assumenda facere ab et quasi ducimus aut doloribus non numquam. Explicabo, laboriosam nisi reprehenderit tempora at laborum natus unde. Ut, exercitationem eum aperiam illo illum laudantium?
                     </div>
-                    <div class="buttons">
-                        <button>SEE MORE</button>
-                        <button>SUBSCRIBE</button>
+                    <div class="buttons grid grid-cols-[repeat(2,_130px)] grid-rows-[40px] gap-[5px] mt-[20px]">
+                        <button class="border-[none] bg-[#eee] tracking-[3px] font-[Poppins] font-medium text-black">SEE MORE</button>
+                        <button class="border-[none] bg-[#eee] tracking-[3px] font-[Poppins] font-medium bg-transparent border-[1px] border-[solid] border-[#fff] text-[#eee]">SUBSCRIBE</button>
                     </div>
                 </div>
             </div>
         </div>
         <!-- list thumnail -->
-        <div class="thumbnail">
-            <div class="item">
-                <img src="{{asset('assets/burger.jpg')}}">
-                <div class="content">
-                    <div class="title">
+        <div class="thumbnail absolute bottom-[50px] left-2/4 w-max flex gap-[20px] z-50">
+            <div class="item w-[150px] h-[220px] flex-shrink-0 relative">
+                <img class="w-full h-full object-cover rounded-[20px] filter brightness-[60%]" src="{{asset('assets/burger.jpg')}}">
+                <div class="content text-[#fff] absolute bottom-[10px] left-[10px] right-[10px]">
+                    <div class="title font-medium">
                         Name Slider
                     </div>
-                    <div class="description">
+                    <div class="description font-light">
                         Description
                     </div>
                 </div>
             </div>
-            <div class="item">
-                <img src="{{asset('assets/pizza.jpg')}}">
-                <div class="content">
-                    <div class="title">
+            <div class="item w-[150px] h-[220px] flex-shrink-0 relative">
+                <img class="w-full h-full object-cover rounded-[20px] filter brightness-[60%]" src="{{asset('assets/pizza.jpg')}}">
+                <div class="content text-[#fff] absolute bottom-[10px] left-[10px] right-[10px]">
+                    <div class="title font-medium">
                         Name Slider
                     </div>
-                    <div class="description">
+                    <div class="description font-light">
                         Description
                     </div>
                 </div>
             </div>
-            <div class="item">
-                <img src="{{asset('assets/pie.jpg')}}">
-                <div class="content">
-                    <div class="title">
+            <div class="item w-[150px] h-[220px] flex-shrink-0 relative">
+                <img class="w-full h-full object-cover rounded-[20px] filter brightness-[60%]" src="{{asset('assets/pie.jpg')}}">
+                <div class="content text-[#fff] absolute bottom-[10px] left-[10px] right-[10px]">
+                    <div class="title font-medium">
                         Name Slider
                     </div>
-                    <div class="description">
+                    <div class="description font-light">
                         Description
                     </div>
                 </div>
             </div>
-            <div class="item">
-                <img src="{{asset('assets/burger.jpg')}}">
-                <div class="content">
-                    <div class="title">
+            <div class="item w-[150px] h-[220px] flex-shrink-0 relative">
+                <img class="w-full h-full object-cover rounded-[20px] filter brightness-[60%]" src="{{asset('assets/burger.jpg')}}">
+                <div class="content text-[#fff] absolute bottom-[10px] left-[10px] right-[10px]">
+                    <div class="title font-medium">
                         Name Slider
                     </div>
-                    <div class="description">
+                    <div class="description font-light">
                         Description
                     </div>
                 </div>
@@ -399,13 +255,11 @@ section::after{
         </div>
         <!-- next prev -->
 
-        <div class="arrows">
-            <button id="prev"><</button>
-            <button id="next">></button>
+        <div class="arrows absolute top-[80%] right-[52%] w-[300px] max-w-[30%] flex gap-[10px] items-center z-50">
+            <button class="w-[40px] h-[40px] rounded-[50%] border-[none] text-[#fff] font-[monospace] font-bold [transition:.5s] bg-yellow-600 border border-white hover:bg-[#fff] hover:text-[#000]" id="prev"><</button>
+            <button class="w-[40px] h-[40px] rounded-[50%] border-[none] text-[#fff] font-[monospace] font-bold [transition:.5s] bg-yellow-600 border border-white hover:bg-[#fff] hover:text-[#000]" id="next">></button>
         </div>
     </div>
-
-    <script src="app.js"></script>
 </section>
 <script>
     //step 1: get DOM
