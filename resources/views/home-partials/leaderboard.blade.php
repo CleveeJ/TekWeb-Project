@@ -139,7 +139,7 @@ a{
     }
 }
 </style>
-<section>
+<section class="relative">
     <!-- carousel -->
     <div class="carousel h-screen w-full overflow-hidden relative">
         <!-- list item -->

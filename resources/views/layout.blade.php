@@ -57,19 +57,19 @@
         section::before{
             content:'';
             position: absolute;
-            bottom: 0;
+            top: 0;
             width: 100%;
-            height: 200px;
-            background:linear-gradient(to top, #000000,transparent);
+            height: 100px;
+            background:linear-gradient(to bottom, #000000,transparent);
             z-index : 1000;
         }
         section::after{
             content:'';
             position: absolute;
-            top: 100%;
+            bottom: 0;
             width: 100%;
-            height: 200px;
-            background:linear-gradient(to bottom, #000000,transparent);
+            height: 100px;
+            background:linear-gradient(to top, #000000,transparent);
             z-index : 1000;
         }
         body{

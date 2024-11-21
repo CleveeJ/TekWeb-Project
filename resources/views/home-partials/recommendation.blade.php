@@ -14,7 +14,7 @@
     }
 </style>
 
-<div class="relative h-screen mt-10">
+<section class="relative h-screen">
     <img src="{{asset('assets/rempah_bg.jpeg')}}" alt="Background" class="absolute top-0 left-0 w-full h-full object-cover">
     <div class="flex items-center justify-center h-full relative z-10 text-white">
         <div class="container rounded-xl shadow-lg w-96 text-center">
@@ -30,7 +30,7 @@
             </div>
         </div>
     </div>
-</div>
+</section>
 
 <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.3/dist/vanilla-tilt.min.js"></script>
 
