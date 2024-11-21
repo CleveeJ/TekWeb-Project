@@ -17,6 +17,12 @@ class UserController extends Controller
         ]);
     }
 
+    public function login()
+    {
+        return view('login', [
+            'title' => 'Login',
+        ]);
+    }
     /**
      * Show the form for creating a new resource.
      */
