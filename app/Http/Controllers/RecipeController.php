@@ -4,9 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Recipe;
 use Illuminate\Http\Request;
+use App\Models\modelRecipe;
 
 class RecipeController extends Controller
 {
+    protected $modelRecipe;
+
+    public function __construct(Recipe $modelRecipe)
+    {
+        $this->modelRecipe = $modelRecipe;
+    }
+
+
     /**
      * Display a listing of the resource.
      */
@@ -28,7 +37,19 @@ class RecipeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $requestFillable = $request->all();
+
+        //dd($requestFillable);
+
+        // Check for and store the uploaded files
+        if ($request->hasFile('food_pic')) {
+            $foodPhoto = $request->file('food_pic');
+            $requestFillable['food_pic'] = $foodPhoto->storePubliclyAs('uploads', $requestFillable['name'] . '_food_pic.' . $foodPhoto->getClientOriginalExtension(), 'public');
+        }
+
+        $this->modelRecipe->create($requestFillable);
+
+        return response()->json(['success' => true, 'message' => 'Recipe added successfully.']);
     }
 
     /**
