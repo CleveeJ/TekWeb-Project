@@ -42,9 +42,9 @@ class RecipeController extends Controller
         //dd($requestFillable);
 
         // Check for and store the uploaded files
-        if ($request->hasFile('food_pic')) {
-            $foodPhoto = $request->file('food_pic');
-            $requestFillable['food_pic'] = $foodPhoto->storePubliclyAs('uploads', $requestFillable['name'] . '_food_pic.' . $foodPhoto->getClientOriginalExtension(), 'public');
+        if ($request->hasFile('food_image')) {
+            $foodPhoto = $request->file('food_image');
+            $requestFillable['food_image'] = $foodPhoto->storePubliclyAs('uploads', $requestFillable['name'] . '_food_image.' . $foodPhoto->getClientOriginalExtension(), 'public');
         }
 
         $this->modelRecipe->create($requestFillable);
