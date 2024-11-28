@@ -3,10 +3,10 @@
         <div>
             <a href="">Welcome</a>
         </div>
-        <ul class="hidden lg:flex list-none gap-5">
-            <li><a href="">Home</a></li>
-            <li><a href="">Home</a></li>
-            <li><a href="">Home</a></li>
+        <ul class="hidden lg:flex list-none gap-5 text-lg">
+            <li><a href="#landing">Home</a></li>
+            <li><a href="#leaderboard">Top 5</a></li>
+            <li><a href="#recommendation">Recommendation</a></li>
             <li><a href="">Home</a></li>
         </ul>
         <a href="" class="hidden lg:block bg-red-500 text-white px-[1rem] py-[0.5rem] border-none outline-none rounded-[20px] text-[0.8rem] font-bold cursor-pointer">Get Started</a>
@@ -14,7 +14,7 @@
             <svg class="fill-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M0 80c0-8.8 7.2-16 16-16l416 0c8.8 0 16 7.2 16 16s-7.2 16-16 16L16 96C7.2 96 0 88.8 0 80zM0 240c0-8.8 7.2-16 16-16l416 0c8.8 0 16 7.2 16 16s-7.2 16-16 16L16 256c-8.8 0-16-7.2-16-16zM448 400c0 8.8-7.2 16-16 16L16 416c-8.8 0-16-7.2-16-16s7.2-16 16-16l416 0c8.8 0 16 7.2 16 16z"/></svg>
         </div>
         <div id="menu" class="absolute sm:end-[2rem] top-[60px] h-0 sm:w-[300px] bg-[rgba(255, 255, 255, 0.1)] backdrop-blur-lg rounded-[10px] overflow-hidden transition-[height] duration-200 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] lg:hidden" style="width: calc(100% - 4rem)">
-            <ul class="list-none ">
+            <ul class="list-none">
                 <li class="p-[0.7rem] flex items-center justify-center"><a href="">Home</a></li>
                 <li class="p-[0.7rem] flex items-center justify-center"><a href="">Home</a></li>
                 <li class="p-[0.7rem] flex items-center justify-center"><a href="">Home</a></li>

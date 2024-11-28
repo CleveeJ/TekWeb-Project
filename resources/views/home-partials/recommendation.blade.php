@@ -14,7 +14,7 @@
     }
 </style>
 
-<section class="relative h-screen">
+<section class="relative h-screen"  id="recommendation">
     <img src="{{asset('assets/rempah_bg.jpeg')}}" alt="Background" class="absolute top-0 left-0 w-full h-full object-cover">
     <div class="flex items-center justify-center h-full relative z-10 text-white">
         <div class="container rounded-xl shadow-lg w-96 text-center">

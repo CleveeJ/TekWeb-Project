@@ -2,12 +2,17 @@
 a{
     text-decoration: none;
 }
+.thumbnail {
+    left: 100%;
+}
 /* animation */
 .carousel .list .item:nth-child(1){
     z-index: 1;
 }
 
+
 /* animation text in first item */
+
 
 .carousel .list .item:nth-child(1) .content .author,
 .carousel .list .item:nth-child(1) .content .title,
@@ -59,6 +64,7 @@ a{
     }
 }
 
+
 .carousel.next .thumbnail .item:nth-last-child(1){
     overflow: hidden;
     animation: showThumbnail .5s linear 1 forwards;
@@ -76,6 +82,7 @@ a{
     animation: effectNext .5s linear 1 forwards;
 }
 
+
 @keyframes effectNext{
     from{
         transform: translateX(150px);
@@ -83,11 +90,15 @@ a{
 }
 
 
+
+
 /* prev click */
+
 
 .carousel.prev .list .item:nth-child(2){
     z-index: 2;
 }
+
 
 .carousel.prev .list .item:nth-child(2) img{
     animation: outFrame 0.5s linear 1 forwards;
@@ -104,6 +115,7 @@ a{
         border-radius: 20px;
     }
 }
+
 
 .carousel.prev .thumbnail .item:nth-child(1){
     overflow: hidden;
@@ -123,6 +135,7 @@ a{
     animation: contentOut 1.5s linear 1 forwards!important;
 }
 
+
 @keyframes contentOut{
     to{
         transform: translateY(-150px);
@@ -139,14 +152,14 @@ a{
     }
 }
 </style>
-<section class="relative">
+<section class="relative" id="leaderboard">
     <!-- carousel -->
     <div class="carousel h-screen w-full overflow-hidden relative">
         <!-- list item -->
         <div class="list">
             <div class="item w-full h-full absolute">
                 <img src="{{asset('assets/burger.jpg')}}" class="w-full h-full object-cover filter brightness-[60%]">
-                <div class="content absolute top-1/4 w-full max-w-[80%] left-2/4 -translate-x-1/2 pr-[30%] box-border text-[#fff] [text-shadow:0_5px_10px_#0004]">
+                <div class="texts content absolute top-1/4 w-full max-w-[80%] left-2/4 -translate-x-1/2 pr-[30%] box-border text-[#fff] [text-shadow:0_5px_10px_#0004]">
                     <div class="author font-bold tracking-[10px]">LUNDEV</div>
                     <div class="title text-[5rem] font-bold leading-[1.3em]">DESIGN SLIDER</div>
                     <div class="topic text-[5rem] font-bold leading-[1.3em] text-[#f1683a]">BURGER</div>
@@ -162,7 +175,7 @@ a{
             </div>
             <div class="item w-full h-full absolute">
                 <img src="{{asset('assets/pizza.jpg')}}" class="w-full h-full object-cover filter brightness-[60%]">
-                <div class="content absolute top-1/4 w-full max-w-[80%] left-2/4 -translate-x-1/2 pr-[30%] box-border text-[#fff] [text-shadow:0_5px_10px_#0004]">
+                <div class="texts content absolute top-1/4 w-full max-w-[80%] left-2/4 -translate-x-1/2 pr-[30%] box-border text-[#fff] [text-shadow:0_5px_10px_#0004]">
                     <div class="author font-bold tracking-[10px]">LUNDEV</div>
                     <div class="title text-[5rem] font-bold leading-[1.3em]">DESIGN SLIDER</div>
                     <div class="topic text-[5rem] font-bold leading-[1.3em] text-[#f1683a]">PIZZA</div>
@@ -177,7 +190,7 @@ a{
             </div>
             <div class="item w-full h-full absolute">
                 <img src="{{asset('assets/pie.jpg')}}" class="w-full h-full object-cover filter brightness-[60%]">
-                <div class="content absolute top-1/4 w-full max-w-[80%] left-2/4 -translate-x-1/2 pr-[30%] box-border text-[#fff] [text-shadow:0_5px_10px_#0004]">
+                <div class="texts content absolute top-1/4 w-full max-w-[80%] left-2/4 -translate-x-1/2 pr-[30%] box-border text-[#fff] [text-shadow:0_5px_10px_#0004]">
                     <div class="author font-bold tracking-[10px]">LUNDEV</div>
                     <div class="title text-[5rem] font-bold leading-[1.3em]">DESIGN SLIDER</div>
                     <div class="topic text-[5rem] font-bold leading-[1.3em] text-[#f1683a]">PIE</div>
@@ -192,7 +205,7 @@ a{
             </div>
             <div class="item w-full h-full absolute">
                 <img src="{{asset('assets/burger.jpg')}}" class="w-full h-full object-cover filter brightness-[60%]">
-                <div class="content absolute top-1/4 w-full max-w-[80%] left-2/4 -translate-x-1/2 pr-[30%] box-border text-[#fff] [text-shadow:0_5px_10px_#0004]">
+                <div class="texts content absolute top-1/4 w-full max-w-[80%] left-2/4 -translate-x-1/2 pr-[30%] box-border text-[#fff] [text-shadow:0_5px_10px_#0004]">
                     <div class="author font-bold tracking-[10px]">LUNDEV</div>
                     <div class="title text-[5rem] font-bold leading-[1.3em]">DESIGN SLIDER</div>
                     <div class="topic text-[5rem] font-bold leading-[1.3em] text-[#f1683a]">ANIMAL</div>
@@ -207,8 +220,8 @@ a{
             </div>
         </div>
         <!-- list thumnail -->
-        <div class="thumbnail absolute bottom-[50px] left-2/4 w-max flex gap-[20px] z-50">
-            <div class="item w-[150px] h-[220px] flex-shrink-0 relative">
+        <div class="thumbnail absolute bottom-[50px] w-max flex gap-[20px] z-50">
+            <div class="item w-[100px] h-[150px] flex-shrink-0 relative">
                 <img class="w-full h-full object-cover rounded-[20px] filter brightness-[60%]" src="{{asset('assets/burger.jpg')}}">
                 <div class="content text-[#fff] absolute bottom-[10px] left-[10px] right-[10px]">
                     <div class="title font-medium">
@@ -219,7 +232,7 @@ a{
                     </div>
                 </div>
             </div>
-            <div class="item w-[150px] h-[220px] flex-shrink-0 relative">
+            <div class="item w-[100px] h-[150px] flex-shrink-0 relative">
                 <img class="w-full h-full object-cover rounded-[20px] filter brightness-[60%]" src="{{asset('assets/pizza.jpg')}}">
                 <div class="content text-[#fff] absolute bottom-[10px] left-[10px] right-[10px]">
                     <div class="title font-medium">
@@ -230,7 +243,7 @@ a{
                     </div>
                 </div>
             </div>
-            <div class="item w-[150px] h-[220px] flex-shrink-0 relative">
+            <div class="item w-[100px] h-[150px] flex-shrink-0 relative">
                 <img class="w-full h-full object-cover rounded-[20px] filter brightness-[60%]" src="{{asset('assets/pie.jpg')}}">
                 <div class="content text-[#fff] absolute bottom-[10px] left-[10px] right-[10px]">
                     <div class="title font-medium">
@@ -241,7 +254,7 @@ a{
                     </div>
                 </div>
             </div>
-            <div class="item w-[150px] h-[220px] flex-shrink-0 relative">
+            <div class="item w-[100px] h-[150px] flex-shrink-0 relative">
                 <img class="w-full h-full object-cover rounded-[20px] filter brightness-[60%]" src="{{asset('assets/burger.jpg')}}">
                 <div class="content text-[#fff] absolute bottom-[10px] left-[10px] right-[10px]">
                     <div class="title font-medium">
@@ -255,6 +268,7 @@ a{
         </div>
         <!-- next prev -->
 
+
         <div class="arrows absolute top-[80%] right-[52%] w-[300px] max-w-[30%] flex gap-[10px] items-center z-50">
             <button class="w-[40px] h-[40px] rounded-[50%] border-[none] text-[#fff] font-[monospace] font-bold [transition:.5s] bg-yellow-600 border border-white hover:bg-[#fff] hover:text-[#000]" id="prev"><</button>
             <button class="w-[40px] h-[40px] rounded-[50%] border-[none] text-[#fff] font-[monospace] font-bold [transition:.5s] bg-yellow-600 border border-white hover:bg-[#fff] hover:text-[#000]" id="next">></button>
@@ -262,43 +276,69 @@ a{
     </div>
 </section>
 <script>
-    //step 1: get DOM
-let nextDom = document.getElementById('next');
-let prevDom = document.getElementById('prev');
-
-let carouselDom = document.querySelector('.carousel');
-let SliderDom = carouselDom.querySelector('.carousel .list');
-let thumbnailBorderDom = document.querySelector('.carousel .thumbnail');
-let thumbnailItemsDom = thumbnailBorderDom.querySelectorAll('.item');
-let timeDom = document.querySelector('.carousel .time');
-
-thumbnailBorderDom.appendChild(thumbnailItemsDom[0]);
-
-nextDom.onclick = function(){
-    showSlider('next');    
-}
-
-prevDom.onclick = function(){
-    showSlider('prev');    
-}
-let runTimeOut;
-function showSlider(type){
-    let  SliderItemsDom = SliderDom.querySelectorAll('.carousel .list .item');
-    let thumbnailItemsDom = document.querySelectorAll('.carousel .thumbnail .item');
+    let tl = gsap.timeline({
+        scrollTrigger: {
+            trigger: '.carousel',
+            start: 'top center',
+            end: 'bottom bottom', // end after scrolling 500px beyond the start
+            scrub: true, // smooth scrubbing, takes 1 second to "catch up" to the scrollbar
+            markers: false,
+        }
+    });
     
-    if(type === 'next'){
-        SliderDom.appendChild(SliderItemsDom[0]);
-        thumbnailBorderDom.appendChild(thumbnailItemsDom[0]);
-        carouselDom.classList.add('next');
-    }else{
-        SliderDom.prepend(SliderItemsDom[SliderItemsDom.length - 1]);
-        thumbnailBorderDom.prepend(thumbnailItemsDom[thumbnailItemsDom.length - 1]);
-        carouselDom.classList.add('prev');
+    tl.to('.thumbnail', {
+        left: '60%'
+    }, 0);
+
+    tl.from('.texts', {
+        x: '-100vw'
+    }, 0);
+
+    tl.from('.arrows', {
+        x: '-100vw'
+    }, 0);
+
+    //step 1: get DOM
+    let nextDom = document.getElementById('next');
+    let prevDom = document.getElementById('prev');
+
+
+    let carouselDom = document.querySelector('.carousel');
+    let SliderDom = carouselDom.querySelector('.carousel .list');
+    let thumbnailBorderDom = document.querySelector('.carousel .thumbnail');
+    let thumbnailItemsDom = thumbnailBorderDom.querySelectorAll('.item');
+    let timeDom = document.querySelector('.carousel .time');
+
+
+    thumbnailBorderDom.appendChild(thumbnailItemsDom[0]);
+
+
+    nextDom.onclick = function(){
+        showSlider('next');    
     }
-    clearTimeout(runTimeOut);
-    runTimeOut = setTimeout(() => {
-        carouselDom.classList.remove('next');
-        carouselDom.classList.remove('prev');
-    }, 700);
-}
+
+
+    prevDom.onclick = function(){
+        showSlider('prev');    
+    }
+    let runTimeOut;
+    function showSlider(type){
+        let  SliderItemsDom = SliderDom.querySelectorAll('.carousel .list .item');
+        let thumbnailItemsDom = document.querySelectorAll('.carousel .thumbnail .item');
+    
+        if(type === 'next'){
+            SliderDom.appendChild(SliderItemsDom[0]);
+            thumbnailBorderDom.appendChild(thumbnailItemsDom[0]);
+            carouselDom.classList.add('next');
+        }else{
+            SliderDom.prepend(SliderItemsDom[SliderItemsDom.length - 1]);
+            thumbnailBorderDom.prepend(thumbnailItemsDom[thumbnailItemsDom.length - 1]);
+            carouselDom.classList.add('prev');
+        }
+        clearTimeout(runTimeOut);
+        runTimeOut = setTimeout(() => {
+            carouselDom.classList.remove('next');
+            carouselDom.classList.remove('prev');
+        }, 700);
+    }
 </script>

@@ -2,7 +2,7 @@
 <div id="landing" class="relative h-[100vh] z-[10] w-full flex  xl:items-center">
     <div id="content" class="w-full flex justify-center text-white opacity-0 scale-95 transition-all duration-[4s]">
         <div class="w-full xl:w-[60%]  xl:pl-[100px] flex flex-col justify-center z-[25]">
-            <div id="title" class="w-full font-bold text-8xl text-center  xl:text-left mb-4">WELCOME</div>
+            <div id="title" class="w-full font-bold text-5xl lg:text-8xl text-center  xl:text-left mb-4">WELCOME</div>
             <p class="text-center  xl:text-left">Lorem ipsum bla bla bla</p>
         </div>
         <div class="w-full  xl:w-[40%] px-3 absolute  xl:static">
