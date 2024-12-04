@@ -1,7 +1,7 @@
 <div class="fixed top-0 left-0 w-full z-[2500]">
     <div class="relative w-full h-[60px] max-width-[1200px] mx-0 my-auto flex justify-between items-center py-2 px-[2rem]">
         <div>
-            <a href="">Welcome</a>
+            <a href="{{ route('user.home') }}"><img src="{{asset('assets/logo.png')}}" alt="logo" class="w-[40px]"></a>
         </div>
         <ul class="hidden lg:flex list-none gap-5 text-lg">
             <li><a href="#landing">Home</a></li>
