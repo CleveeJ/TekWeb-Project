@@ -3,11 +3,10 @@
         <div>
             <a href="{{ route('user.home') }}"><img src="{{asset('assets/logo.png')}}" alt="logo" class="w-[40px]"></a>
         </div>
-        <ul class="hidden lg:flex list-none gap-5 text-lg">
-            <li><a href="#landing">Home</a></li>
-            <li><a href="#leaderboard">Top 5</a></li>
-            <li><a href="#recommendation">Recommendation</a></li>
-            <li><a href="">Home</a></li>
+        <ul class="hidden lg:flex list-none gap-5 text-lg pl-16">
+            <li><a href="{{ route('user.home') }}#landing">Home</a></li>
+            <li><a href="{{ route('user.home') }}#leaderboard">Top 5</a></li>
+            <li><a href="{{ route('user.home') }}#recommendation">Recommendation</a></li>
         </ul>
         <a href="" class="hidden lg:block bg-red-500 text-white px-[1rem] py-[0.5rem] border-none outline-none rounded-[20px] text-[0.8rem] font-bold cursor-pointer">Get Started</a>
         <div id="dropdown" class="font-bold w-[24px] cursor-pointer lg:hidden">
