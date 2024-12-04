@@ -13,4 +13,4 @@ Route::get('/recipes',  [UserController::class, 'recipes'])->name('user.recipes'
 
 Route::post('/form/store', [RecipeController::class, 'store'])->name('recipeForm.store');
 
-Route::get('/recipes/detail',  [RecipeController::class, 'recipeDetailIndex'])->name('recipe.detail');
+Route::get('/recipes/{recipe_id}',  [RecipeController::class, 'recipeDetailIndex'])->name('recipe.detail');
