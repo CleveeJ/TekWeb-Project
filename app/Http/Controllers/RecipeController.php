@@ -24,6 +24,12 @@ class RecipeController extends Controller
         //
     }
 
+    public function recipeDetailIndex()
+    {
+        return view('recipeDetail', [
+            'title' => 'Details',
+        ]);
+    }
     /**
      * Show the form for creating a new resource.
      */
