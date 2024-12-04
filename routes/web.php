@@ -9,5 +9,6 @@ use App\Http\Controllers\RecipeController;
 Route::get('/',  [UserController::class, 'index'])->name('user.home');
 Route::get('/login',  [UserController::class, 'login'])->name('user.login');
 Route::get('/form',  [UserController::class, 'form'])->name('user.form');
+Route::get('/recipes',  [UserController::class, 'recipes'])->name('user.recipes');
 
 Route::post('/form/store', [RecipeController::class, 'store'])->name('recipeForm.store');
