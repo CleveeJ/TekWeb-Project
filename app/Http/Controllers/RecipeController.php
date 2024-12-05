@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Recipe;
 use Illuminate\Http\Request;
-use App\Models\modelRecipe;
+use Illuminate\Support\Facades\Storage;
 
 class RecipeController extends Controller
 {
@@ -37,6 +37,17 @@ class RecipeController extends Controller
         //
     }
 
+    public function recipeDetailIndex($recipe_id)
+    {
+        $data = Recipe::with('user')->where('id', $recipe_id)->first();
+        if ($data) {
+            $data->food_image = Storage::url($data->food_image);
+        }
+        return view('recipeDetail', [
+            'title' => $data->name,
+            'data' => json_encode($data),
+        ]);
+    }
     /**
      * Show the form for creating a new resource.
      */
