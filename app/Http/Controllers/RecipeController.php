@@ -17,8 +17,19 @@ class RecipeController extends Controller
 
     public function recipes()
     {
+        $recipes = Recipe::get(); //Recipe::with('user')->get();
+        $data = [];
+        foreach ($recipes as $r) {
+            $try = [];
+            $try['id'] = $r->id;
+            $try['name'] = $r->name;
+            $try['images'] = $r->food_image; //Belum Storage $r->food_image ? Storage::url($r->food_image) : null,
+            //$try['user_name'] = $r->user->name; //Blm ada user
+            $data[] = $try;
+        }
         return view('recipes', [
             'title' => 'All Recipes',
+            'recipes' => $data,
         ]);
     }
 
