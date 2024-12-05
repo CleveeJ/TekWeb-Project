@@ -93,13 +93,13 @@
         tl.from('.card', {
             opacity: 0,
             y: 20,
-            stagger: 0.1,
+            stagger: 0.2,
             duration: 1,
         }, 0.4);
         tl.from('.image', {
             opacity: 0,
             y: 20,
-            stagger: 0.1,
+            stagger: 0.2,
             duration: 1,
         }, 0);
         tl.play();
