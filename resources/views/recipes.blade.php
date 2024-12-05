@@ -3,9 +3,9 @@
 @section('content')
 @include('navbar')
 
-<div id="container" class="w-full py-4 px-8 md:px-28 pt-[70px]">
+<div id="container" class="w-full py-4 px-8 md:px-28 pt-[70px] min-h-screen">
     <div class="w-full text-[50px] text-white text-center mb-5">
-        All Recipes
+        {{ $title }}
     </div>
 
 
@@ -50,20 +50,17 @@
 
 <script>
     const search = document.getElementById('search');
-    let dataList = [];
+    let dataList = @json($recipes);
     search.addEventListener("input", (e) => {
         const value = e.target.value.toLowerCase();
-        console.log(value);
-        const filteredDataList = dataList.filter(student => {
-            console.log(student);
-            return student.name.toLowerCase().includes(value) || student.nrp.toLowerCase().includes(value);
+        const filteredDataList = dataList.filter(recipe => {
+            return recipe.name.toLowerCase().includes(value);//user
         });
         console.log(filteredDataList)
         display(filteredDataList);
     });
 
     
-    const tl = gsap.timeline({ paused: true });
     const display = (data) => {
         $('#list').html('');
         data.forEach(recipe => {
@@ -91,23 +88,24 @@
                 </div>
             `);
         });
-
+        
+        const tl = gsap.timeline({ paused: true });
         tl.from('.card', {
             opacity: 0,
             y: 20,
             stagger: 0.1,
             duration: 1,
-        }, 0.5);
+        }, 0.4);
         tl.from('.image', {
             opacity: 0,
             y: 20,
             stagger: 0.1,
             duration: 1,
-        }, 0.5);
+        }, 0);
         tl.play();
     }
 
-    display(@json($recipes));
+    display(dataList);
 </script>
 
 <script>
