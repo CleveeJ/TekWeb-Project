@@ -257,7 +257,7 @@
             $('#list').append(`
                 <div id="card" class="w-full rounded-2xl overflow-hidden p-2 bg-[#f1683a]">
                     <div class="w-full aspect-square rounded-2xl overflow-hidden">
-                        <img src="{{asset('assets/burger.jpg')}}" alt="" class="w-full h-full object-center object-cover">
+                        <img src="${recipe.image}" alt="${recipe.name}" class="w-full h-full object-center object-cover">
                     </div>
                     <div class="w-full text-lg p-1.5 flex justify-center border-[rgba(255,255,255,0.4)] border-b-[1px] mb-3">
                         <div>${recipe.name}</div>

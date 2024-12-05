@@ -23,7 +23,7 @@ class RecipeController extends Controller
             $try = [];
             $try['id'] = $r->id;
             $try['name'] = $r->name;
-            $try['images'] = $r->food_image; //Belum Storage $r->food_image ? Storage::url($r->food_image) : null,
+            $try['image'] = $r->food_image ? Storage::url($r->food_image) : null; //Belum Storage $r->food_image ? Storage::url($r->food_image) : null,
             //$try['user_name'] = $r->user->name; //Blm ada user
             $data[] = $try;
         }
