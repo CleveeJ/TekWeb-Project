@@ -15,6 +15,19 @@ class RecipeController extends Controller
         $this->modelRecipe = $modelRecipe;
     }
 
+    public function recipes()
+    {
+        return view('recipes', [
+            'title' => 'All Recipes',
+        ]);
+    }
+
+    public function form()
+    {
+        return view('form', [
+            'title' => 'Form',
+        ]);
+    }
 
     /**
      * Display a listing of the resource.

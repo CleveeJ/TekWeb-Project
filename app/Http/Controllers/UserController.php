@@ -24,19 +24,6 @@ class UserController extends Controller
         ]);
     }
 
-    public function form()
-    {
-        return view('form', [
-            'title' => 'Form',
-        ]);
-    }
-
-    public function recipes()
-    {
-        return view('recipes', [
-            'title' => 'All Recipes',
-        ]);
-    }
 
     /**
      * Show the form for creating a new resource.

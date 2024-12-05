@@ -55,7 +55,7 @@
                             <div class="flex">
                                 <textarea name="ingredients" id="ingredients"
                                     class="rounded-none rounded-e-lg bg-transparent backdrop-blur-2xl border border-gray-300 text-white focus:ring-[var(--sand1)] focus:border-[var(--sand1)] block flex-1 min-w-0 w-full text-[3.5vw] sm:text-sm p-1.5 sm:p-2.5"
-                                    placeholder="Format: 5 butir telur, 10 gram gula, ..."></textarea>
+                                    placeholder="Format: Enter Setiap Bahan"></textarea>
                             </div>
                         </div>
                     </div>
@@ -67,7 +67,7 @@
                             <div class="flex">
                                 <textarea name="procedures" id="procedures"
                                     class="rounded-none rounded-e-lg bg-transparent backdrop-blur-2xl border border-gray-300 text-white focus:ring-[var(--sand1)] focus:border-[var(--sand1)] block flex-1 min-w-0 w-full text-[3.5vw] sm:text-sm p-1.5 sm:p-2.5"
-                                    placeholder="Format: Rawat telor, Buang gula, ..."></textarea>
+                                    placeholder="Format: Enter Setiap Prosedur"></textarea>
                             </div>
                         </div>
                     </div>
