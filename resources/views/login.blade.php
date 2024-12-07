@@ -61,12 +61,12 @@
             </form>
         </div>
         <div class="form-konten sign-in bg-[linear-gradient(to_right,_#242124,_#222021)] absolute top-[0] h-full transition-all ease-in-out duration-700 left-[0] w-1/2 z-2">
-            <form class="bg-[linear-gradient(to_right,_#242124,_#222021)] flex items-center justify-center flex-col px-[40px] py-[0] h-full">
+            <form id="login" method="GET" action="{{route('user.processLogin')}}" class="bg-[linear-gradient(to_right,_#242124,_#222021)] flex items-center justify-center flex-col px-[40px] py-[0] h-full">
                 @csrf
                 <h1 class="font-semibold text-xl text-orange-600">Sign In</h1>
-                <input class="bg-[#eee] border-[none] mx-[0] my-[8px] px-[15px] py-[10px] text-[13px] rounded-[8px] w-full outline-[none]" type="email" placeholder="Email">
-                <input class="bg-[#eee] border-[none] mx-[0] my-[8px] px-[15px] py-[10px] text-[13px] rounded-[8px] w-full outline-[none]" type="password" placeholder="Password">
-                <button class="bg-orange-600 text-[#fff] text-[12px] px-[45px] py-[10px] border-[1px] border-[solid] border-[transparent] rounded-[8px] font-semibold tracking-[0.5px] uppercase mt-[10px] cursor-pointer">Sign In</button>
+                <input name="email" class="text-black bg-[#eee] border-[none] mx-[0] my-[8px] px-[15px] py-[10px] text-[13px] rounded-[8px] w-full outline-[none]" type="text" placeholder="Email">
+                <input name="password" class="text-black bg-[#eee] border-[none] mx-[0] my-[8px] px-[15px] py-[10px] text-[13px] rounded-[8px] w-full outline-[none]" type="password" placeholder="Password">
+                <button type="submit" class="bg-orange-600 text-[#fff] text-[12px] px-[45px] py-[10px] border-[1px] border-[solid] border-[transparent] rounded-[8px] font-semibold tracking-[0.5px] uppercase mt-[10px] cursor-pointer">Sign In</button>
             </form>
         </div>
         <div class="toggle-konten absolute top-[0] left-2/4 w-1/2 h-full overflow-hidden transition-all ease-in-out duration-700 rounded-tl-[150px] rounded-br-[0] rounded-tr-[0] rounded-bl-[100px] z-[1000]">
@@ -90,19 +90,6 @@
 <script>
     $("#signup").on('submit',function(e){
         e.preventDefault();
-
-        // Swal.fire({
-        //     title: "Success!",
-        //     text: "Halo",
-        //     icon: "success",
-        //     confirmButtonColor: "3085d6",
-        //     confirmButtonText: "OK"
-        // }).then((result) => {
-        //     if (result.isConfirmed) {
-        //         window.location.reload();
-        //     }
-        // });
-        
         Swal.fire({
             title: "Are you sure with your data?",
             text: "You can only submit once!",
@@ -168,9 +155,62 @@
                     confirmButtonText: "OK"
                 });
             }
-        });
-        
+        }); 
     });
+
+
+
+    // $("#login").on('submit',function(e){
+    //     e.preventDefault();
+    //     var form = $(this)[0];
+    //     var formData = new FormData(form);
+    //     var method = 'GET';
+    //     var url = "{{ route('user.processLogin') }}";
+
+    //     $.ajax({
+    //         type: method,
+    //         url: url,
+    //         data: formData,
+    //         processData: false,
+    //         contentType: false,
+    //         cache: false,
+
+    //         success: async function(response) {
+    //             if (response.success) {
+    //                 await Swal.fire({
+    //                     title: "Success!",
+    //                     text: response.message,
+    //                     icon: "success",
+    //                     confirmButtonColor: "3085d6",
+    //                     confirmButtonText: "OK"
+    //                 }).then((result) => {
+    //                     if (result.isConfirmed) {
+    //                         window.location.reload();
+    //                     }
+    //                     setTimeout(() => {
+    //                         window.location.reload(); 
+    //                     }, 1500);
+    //                 });
+
+    //             } else {
+    //                 await Swal.fire({
+    //                     icon:"error",
+    //                     title: "Oopss...",
+    //                     text: response.message,
+    //                 });
+    //             }
+    //         },
+    //         error: async function(xhr, textStatus, errorThrown) {
+    //             await Swal.fire({
+    //                 title: 'Oops!',
+    //                 text: 'Something went wrong: ' + textStatus + '-' + errorThrown,
+    //                 icon: 'error',
+    //                 confirmButtonText: 'OK'
+    //             });
+    //         }
+    //     });
+        
+    // });
 </script>
 <script>
     const konten = document.getElementById('konten');

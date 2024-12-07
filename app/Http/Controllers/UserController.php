@@ -57,12 +57,42 @@ class UserController extends Controller
         if ($valid->fails()) {
             return response()->json(['success' => false, 'message' => $valid->errors()->first()]);
         }
+        if (User::where('email', $request->email)->exists()){
+            return response()->json(['success' => false, 'message' => "Email sudah digunakan"]);
+        }
         User::create([
             'username'=>$request->name,
             'email'=>$request->email,
-            'password'=>Hash::make($request->password)
+            'password'=>Hash::make($request->pass)
         ]);
         return response()->json(['success' => true, 'message' => "Success"], 201);
+    }
+
+    public function checkLogin(Request $request)
+    {
+        //dd($request->all());
+        $rules = [
+            'email' => 'required',
+            'password' => 'required',
+        ];
+        $messages = [
+            'email.required' => 'Email field is required',
+            'password.required' => 'Password field is required',
+        ];
+        $valid = Validator::make($request->all(), $rules, $messages);
+
+        if ($valid->fails()) {
+            return response()->json(['success' => false, 'message' => $valid->errors()->first()]);
+        }
+
+        $userExist = User::where('email', $request->email)->first();
+        // foreach($userExist as $user){
+            
+        // }
+        if ($userExist && Hash::check($request->password, $userExist->password)) {
+            return redirect()->to(route('user.home'));
+        }
+        return response()->json(['success' => false, 'message' => "Username/Password incorrect"]);
     }
 
     /**

@@ -9,6 +9,7 @@ use App\Http\Controllers\RecipeController;
 Route::get('/',  [UserController::class, 'index'])->name('user.home');
 Route::get('/login',  [UserController::class, 'login'])->name('user.login');
 Route::post('/signup',  [UserController::class, 'store'])->name('user.signup');
+Route::get('/processLogin',  [UserController::class, 'checkLogin'])->name('user.processLogin');
 Route::get('/form',  [RecipeController::class, 'form'])->name('user.form');
 Route::get('/recipes',  [RecipeController::class, 'recipes'])->name('user.recipes');
 
