@@ -82,7 +82,7 @@ class UserController extends Controller
         $valid = Validator::make($request->all(), $rules, $messages);
 
         if ($valid->fails()) {
-            return response()->json(['success' => false, 'message' => $valid->errors()->first()]);
+            return redirect()->back()->with('error', $valid->errors()->first());
         }
 
         $userExist = User::where('email', $request->email)->first();
@@ -90,9 +90,9 @@ class UserController extends Controller
             
         // }
         if ($userExist && Hash::check($request->password, $userExist->password)) {
-            return redirect()->to(route('user.home'));
+            return redirect()->route('user.home')->with('success', 'Login success');
         }
-        return response()->json(['success' => false, 'message' => "Username/Password incorrect"]);
+        return redirect()->back()->with('error', 'Username/Password incorrect');
     }
 
     /**

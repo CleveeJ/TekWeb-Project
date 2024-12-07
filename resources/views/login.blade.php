@@ -6,8 +6,13 @@
     .sign-up{
         opacity: 0;
         z-index: 1;
-        display: none;
+        display: block;
     }
+
+    .animateSignup {
+        animation: reverseMove 0.25s;
+    }
+
     .konten.active .sign-in{
         transform: translateX(100%);
     }
@@ -20,15 +25,29 @@
     }
 
     @keyframes move{
-        0%, 49.99%{
+        0%{
             opacity: 0;
-            z-index: 1;
         }
-        50%, 100%{
+        35%{
+            opacity: 0;
+        }
+        40%{
             opacity: 1;
             z-index: 5;
         }
     }
+
+    @keyframes reverseMove{
+        0%, 90%{
+            opacity: 1;
+            z-index: 5;
+        }
+        100%{
+            opacity: 0;
+        }
+        
+    }
+    
     .konten.active .toggle-konten{
         transform: translateX(-100%);
         border-radius: 0 150px 100px 0;
@@ -37,7 +56,7 @@
         transform: translateX(50%);
     }
     .konten.active .toggle-left{
-        transform: translateX(0);
+        transform: translateX(0%);
     }
     .konten.active .toggle-right{
         transform: translateX(200%);
@@ -46,11 +65,21 @@
 @endSection
 
 @section('content')
+@if (session()->has('error'))
+    <script>
+        Swal.fire({
+            title: "ERROR",
+            text: "{{ session('error') }}",
+            confirmButtonColor: "#3085d6",
+            icon: "error"
+        });
+    </script>
+@endif
 <canvas id="particleCanvas" class="absolute inset-0 w-full h-full z-0"></canvas>
 <section class="bg-[#33363d] flex items-center justify-center flex-col h-screen">
 
     <div class="konten bg-[linear-gradient(to_right,_#242124,_#222021)] rounded-[30px] [box-shadow:0_5px_15px_rgba(0,_0,_0,_0.35)] relative overflow-hidden w-[768px] max-w-full min-h-[480px]" id="konten">
-        <div class="form-konten sign-up absolute top-[0] h-full transition-all ease-in-out duration-700 left-[0] w-1/2">
+        <div id="signupContainer" class="form-konten sign-up absolute top-[0] h-full transition-all ease-in-out duration-700 left-[0] w-1/2">
             <form id="signup" action="{{route('user.signup')}}" method="POST" class="bg-[linear-gradient(to_right,_#242124,_#222021)] flex items-center justify-center flex-col px-[40px] py-[0] h-full">
                 @csrf
                 <h1 class="font-semibold text-xl text-orange-600">Create Account</h1>
@@ -60,7 +89,7 @@
                 <button type="submit" class="bg-orange-600 text-[#fff] text-[12px] px-[45px] py-[10px] border-[1px] border-[solid] border-[transparent] rounded-[8px] font-semibold tracking-[0.5px] uppercase mt-[10px] cursor-pointer">Sign Up</button>
             </form>
         </div>
-        <div class="form-konten sign-in bg-[linear-gradient(to_right,_#242124,_#222021)] absolute top-[0] h-full transition-all ease-in-out duration-700 left-[0] w-1/2 z-2">
+        <div class="form-konten sign-in bg-[linear-gradient(to_right,_#242124,_#222021)] absolute top-[0] h-full transition-all ease-in-out duration-700 left-[0] w-1/2 z-[2]">
             <form id="login" method="GET" action="{{route('user.processLogin')}}" class="bg-[linear-gradient(to_right,_#242124,_#222021)] flex items-center justify-center flex-col px-[40px] py-[0] h-full">
                 @csrf
                 <h1 class="font-semibold text-xl text-orange-600">Sign In</h1>
@@ -71,15 +100,15 @@
         </div>
         <div class="toggle-konten absolute top-[0] left-2/4 w-1/2 h-full overflow-hidden transition-all ease-in-out duration-700 rounded-tl-[150px] rounded-br-[0] rounded-tr-[0] rounded-bl-[100px] z-[1000]">
             <div class="toggle bg-orange-500 h-full text-[#0d0d0d] relative -left-full w-[200%] translate-x-[0] transition-all ease-in-out duration-700">
-                <div class="toggle-panel toggle-left absolute w-1/2 h-full flex items-center justify-center flex-col px-[30px] py-[0] text-center top-[0] translate-x-[0] transition-all ease-in-out duration-700 -translate-x-[200%]">
+                <div class="toggle-panel toggle-left absolute w-1/2 h-full flex items-center justify-center flex-col px-[30px] py-[0] text-center top-[0] translate-x-[-200%] transition-all ease-in-out duration-700 -translate-x-[200%]">
                     <h1 class="font-bold text-lg">Already have account?</h1>
                     <!-- <p class="text-[14px] leading-[20px] tracking-[0.3px] mx-[0] my-[20px]">Enter your personal details to use all of site features</p> -->
-                    <button class="hilang bg-orange-600 text-[#010203] text-[12px] px-[45px] py-[10px] border-[2] border-[solid] rounded-[8px] font-semibold tracking-[0.5px] uppercase mt-[10px] cursor-pointer border border-[#3b3b3b] bg-transparent font-medium" id="login">Sign In</button>
+                    <button class="hilang bg-orange-600 text-[#010203] text-[12px] px-[45px] py-[10px] border-[2] border-[solid] rounded-[8px] font-semibold tracking-[0.5px] uppercase mt-[10px] cursor-pointer border border-[#3b3b3b] bg-transparent font-medium" id="loginButton">Sign In</button>
                 </div>
                 <div class="toggle-panel toggle-right absolute w-1/2 h-full flex items-center justify-center flex-col px-[30px] py-[0] text-center top-[0] translate-x-[0] transition-all ease-in-out duration-700 right-[0] translate-x-[0]">
                     <h1 class="font-bold text-lg">Don't have account?</h1>
                     <!-- <p class="text-[14px] leading-[20px] tracking-[0.3px] mx-[0] my-[20px]">Register here</p> -->
-                    <button class="hilang bg-orange-600 text-[#010203] text-[12px] px-[45px] py-[10px] border-[2] border-[solid] rounded-[8px] font-semibold tracking-[0.5px] uppercase mt-[10px] cursor-pointer border border-[#3b3b3b] bg-transparent font-medium" id="register">Sign Up</button>
+                    <button class="hilang bg-orange-600 text-[#010203] text-[12px] px-[45px] py-[10px] border-[2] border-[solid] rounded-[8px] font-semibold tracking-[0.5px] uppercase mt-[10px] cursor-pointer border border-[#3b3b3b] bg-transparent font-medium" id="registerButton">Sign Up</button>
                 </div>
             </div>
         </div>
@@ -123,11 +152,11 @@
                                 confirmButtonText: "OK"
                             }).then((result) => {
                                 if (result.isConfirmed) {
-                                    window.location.reload();
+                                    konten.classList.remove("active");
+                                    document.getElementById('name').value = "";
+                                    document.getElementById('email').value = "";
+                                    document.getElementById('pass').value = "";
                                 }
-                                setTimeout(() => {
-                                    window.location.reload(); 
-                                }, 1500);
                             });
 
                         } else {
@@ -214,14 +243,21 @@
 </script>
 <script>
     const konten = document.getElementById('konten');
-    const registerBtn = document.getElementById('register');
-    const loginBtn = document.getElementById('login');
+    const registerBtn = document.getElementById('registerButton');
+    const loginBtn = document.getElementById('loginButton');
+    console.log(loginBtn);
 
     registerBtn.addEventListener('click', () => {
+        //console.log('register diklik');
         konten.classList.add("active");
+        const signUpElement = document.querySelector('.sign-up');
+        setTimeout(() => {
+            signUpElement.classList.add('animateSignup');
+        }, 250);
     });
 
     loginBtn.addEventListener('click', () => {
+        //console.log('login diklik');
         konten.classList.remove("active");
     });
 

@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
+use App\Models\User;
 use App\Models\Recipe;
+use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class RecipeSeeder extends Seeder
 {
@@ -23,6 +24,7 @@ class RecipeSeeder extends Seeder
                     Stir in tomato sauce and let it simmer for 10 minutes. \n
                     Season with salt and pepper. Serve sauce over spaghetti.',
                 'food_image' => 'spaghetti-bolognese.jpg',
+                'user_id' => User::where('email', 'a1@gmail.com')->first()->id,
             ],
             [
                 'name' => 'Chocolate Cake',
@@ -33,6 +35,7 @@ class RecipeSeeder extends Seeder
                     Stir in tomato sauce and let it simmer for 10 minutes. \n
                     Season with salt and pepper. Serve sauce over spaghetti.',
                 'food_image' => 'chocolate-cake.jpg',
+                'user_id' => User::where('email', 'a2@gmail.com')->first()->id,
             ],
         ];
 
