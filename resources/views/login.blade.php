@@ -1,5 +1,7 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-<script src="https://cdn.tailwindcss.com"></script>
+@extends('layout')
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<script src="https://cdn.tailwindcss.com"></script> -->
+@section('style')
 <style>
     .sign-up{
         opacity: 0;
@@ -41,8 +43,10 @@
         transform: translateX(200%);
     }
 </style>
+@endSection
 
-
+@section('content')
+<canvas id="particleCanvas" class="absolute inset-0 w-full h-full z-0"></canvas>
 <section class="bg-[#33363d] flex items-center justify-center flex-col h-screen">
 
     <div class="konten bg-[linear-gradient(to_right,_#242124,_#222021)] rounded-[30px] [box-shadow:0_5px_15px_rgba(0,_0,_0,_0.35)] relative overflow-hidden w-[768px] max-w-full min-h-[480px]" id="konten">
@@ -78,8 +82,10 @@
             </div>
         </div>
     </div>
-
-    <script>
+</section>
+@endSection
+@section('script')
+<script>
         const konten = document.getElementById('konten');
         const registerBtn = document.getElementById('register');
         const loginBtn = document.getElementById('login');
@@ -91,5 +97,119 @@
         loginBtn.addEventListener('click', () => {
             konten.classList.remove("active");
         });
+
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let particles = [];
+        const particleCount = 300; // Number of particles
+        const mouse = {
+            x: null,
+            y: null,
+            radius: 100 // Interaction radius
+        };
+
+        // Mouse move event
+        window.addEventListener('mousemove', (event) => {
+            mouse.x = event.x;
+            mouse.y = event.y;
+        });
+
+        // Particle class
+        class Particle {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.size = Math.random() * 2 + 0.75; // Size for particles
+                this.speedX = Math.random() * 3 - 1.5; // Random speed in x direction
+                this.speedY = Math.random() * 3 - 1.5; // Random speed in y direction
+            }
+
+            update() {
+                // Calculate distance from mouse
+                const dx = this.x - mouse.x;
+                const dy = this.y - mouse.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+
+                // If within the interaction radius, move particle away from mouse
+                if (distance < mouse.radius) {
+                    if (this.x < mouse.x) this.x -= 1; // Move left
+                    if (this.x > mouse.x) this.x += 1; // Move right
+                    if (this.y < mouse.y) this.y -= 1; // Move up
+                    if (this.y > mouse.y) this.y += 1; // Move down
+                }
+
+                // Bounce off the edges
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+
+                this.x += this.speedX;
+                this.y += this.speedY;
+            }
+
+            draw() {
+                ctx.fillStyle = 'rgba(255, 98, 6, 0.8)'; // Color for particles
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        // Initialize particles
+        function init() {
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle(Math.random() * canvas.width, Math.random() * canvas.height));
+            }
+        }
+
+        // Animate particles
+        function animate() {
+            // Create a gradient from purple to black
+            const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            gradient.addColorStop(0, 'rgba(27, 0, 32, 1)'); // Purple
+            gradient.addColorStop(1, 'rgba(0, 0, 0, 1)'); // Black
+
+            // Fill the canvas with the gradient
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Draw lines between particles
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    // Draw a line if the distance is less than a certain threshold
+                    if (distance < 100) { // Adjust this value to change the connection distance
+                        ctx.strokeStyle = 'rgba(225, 98, 6, 0.5)'; // Color for lines
+                        ctx.lineWidth = 0.5; // Line width
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        // Handle resizing
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Start the animation
+        init();
+        animate();  
+
     </script>
-</section>
+@endSection
