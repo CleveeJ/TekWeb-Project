@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -38,7 +40,29 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($request->all());
+        $rules = [
+            'name' => 'required',
+            'email' => 'required',
+            'pass' => 'required | min:8',
+        ];
+        $messages = [
+            'name.required' => 'Username field is required',
+            'email.required' => 'Email field is required',
+            'pass.required' => 'Password field is required',
+            'pass.min' => 'Password must contain at least 8 characters',
+        ];
+        $valid = Validator::make($request->all(), $rules, $messages);
+
+        if ($valid->fails()) {
+            return response()->json(['success' => false, 'message' => $valid->errors()->first()]);
+        }
+        User::create([
+            'username'=>$request->name,
+            'email'=>$request->email,
+            'password'=>Hash::make($request->password)
+        ]);
+        return response()->json(['success' => true, 'message' => "Success"], 201);
     }
 
     /**
