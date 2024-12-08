@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
-class CommentsController extends Controller
+class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -26,9 +27,27 @@ class CommentsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, $recipe_id)
     {
-        //
+        //dd($request->all());
+        $valid = Validator::make($request->all(), [
+            'rating' => 'required|integer|between:1,5',
+            'comment' => 'required|string|max:1000',
+        ],
+        [
+            'rating.between' => 'Rating must between 1-5',
+            'comment.max' => 'The comment cannot be longer than 1000 characters'
+        ]);
+        if ($valid->fails()) {
+            return response()->json(['success' => false, 'message' => $valid->errors()->first()]);
+        }
+        Comment::create([
+            'comment'=>$request->comment,
+            'rating'=>$request->rating,
+            'recipe_id'=>$recipe_id,
+            //'user_id' => nanti kalo dah ada session
+        ]);
+        return response()->json(['success' => true, 'message' => "Success"], 201);
     }
 
     /**

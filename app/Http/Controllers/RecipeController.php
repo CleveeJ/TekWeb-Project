@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Recipe;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -51,12 +52,15 @@ class RecipeController extends Controller
     public function recipeDetailIndex($recipe_id)
     {
         $data = Recipe::with('user')->where('id', $recipe_id)->first();
+        $comments = Comment::with('user')->where('recipe_id', $recipe_id)->get();
         if ($data) {
             $data->food_image = Storage::url($data->food_image);
         }
         return view('recipeDetail', [
             'title' => $data->name,
+            'recipe_id' => $recipe_id,
             'data' => json_encode($data),
+            'comments' => json_encode($comments),
         ]);
     }
     /**

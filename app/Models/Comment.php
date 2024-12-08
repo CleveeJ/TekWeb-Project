@@ -2,25 +2,31 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Comments extends Model
+class Comment extends Model
 {
     use HasFactory, HasUuids;
 
     protected $fillable = [
         'user_id',
         'recipe_id',
-        'comments',
+        'comment',
         'rating',
     ];
 
     protected $hidden = [
-        'created_at',
         'updated_at',
     ];
+
+    //Accessor
+    public function getCreatedAtAttribute($value)
+    {
+        return Carbon::parse($value)->format('M d, Y'); // Format the created_at date
+    }
 
     public function user()
     {

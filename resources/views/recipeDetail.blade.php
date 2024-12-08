@@ -41,7 +41,7 @@
     <!-- Comments -->
     <div id="comments" class="flex flex-col justify-center items-start w-full mt-10 border border-white bg-white/10 backdrop-blur-lg rounded-xl pt-8 px-6 pb-6 shadow-md">
         <h1 class="text-xl md:text-2xl font-bold mb-4 text-white">Comments</h1>
-        <form id="commentForm" action="{{ route('comment.store') }}" method="POST" class="w-full flex flex-col bg-transparent border border-white/70 rounded-xl p-4 mb-6 shadow-inner backdrop-blur-sm" method="POST" action="/submit-comment">
+        <form id="commentForm" action="{{ route('comment.store', ['recipe_id' => $recipe_id]) }}" method="POST" class="w-full flex flex-col bg-transparent border border-white/70 rounded-xl p-4 mb-6 shadow-inner backdrop-blur-sm" method="POST" action="/submit-comment">
             @csrf
             <!-- Rating -->
             <div class="flex items-center mb-4">
@@ -102,7 +102,7 @@
 @section('script')
 <script>
     const data = JSON.parse(@json($data));
-    //console.log(data);
+    console.log(data);
 
     //Image
     const img = document.getElementById('gambarMakanan');
@@ -180,72 +180,106 @@
     });
 
     //Comment submission
-    // $('#commentForm').on('click', function(e) {
-    //     e.preventDefault();
+    $('#commentForm').on('submit', function(e) {
+        e.preventDefault();
 
-    //     var form =  $(this);
-    //     var url = form.attr('action');
-    //     var method = form.attr('method');
+        var form =  $(this);
+        var url = form.attr('action');
+        var method = form.attr('method');
 
-    //     //show confirmation dialog
-    //     Swal.fire({
-    //         title: "Are you sure want to submit?",
-    //         text: "You won't be able to revert this!",
-    //         icon: "warning",
-    //         showCancelButton: true,
-    //         confirmButtonColor: "#3085d6",
-    //         cancelButtonColor: "#d33",
-    //         confirmButtonText: "Yes, submit it!"
-    //     }).then((result) => {
-    //         if (result.isConfirmed) {
-    //             var formData = new FormData(form[0]);
-    //             $.ajax({
-    //                 url: url,
-    //                 type: method,
-    //                 data: formData,
-    //                 processData: false, //to prevent jQuery from automatically transforming the data into a query string
-    //                 contentType: false,
-    //                 success: async function(response) {
-    //                     if (response.success) {
-    //                         await Swal.fire({
-    //                             title: "Success!",
-    //                             text: response.message,
-    //                             icon: "success",
-    //                             confirmButtonColor: "#3085d6",
-    //                             confirmButtonText: "OK"
-    //                         }).then((result) => {
-    //                             if (result.isConfirmed) {
-    //                                 window.location.reload();
-    //                             }
+        //show confirmation dialog
+        Swal.fire({
+            title: "Are you sure want to submit?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, submit it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                var formData = new FormData(form[0]);
+                $.ajax({
+                    url: url,
+                    type: method,
+                    data: formData,
+                    processData: false, //to prevent jQuery from automatically transforming the data into a query string
+                    contentType: false,
+                    success: async function(response) {
+                        if (response.success) {
+                            await Swal.fire({
+                                title: "Success!",
+                                text: response.message,
+                                icon: "success",
+                                confirmButtonColor: "#3085d6",
+                                confirmButtonText: "OK"
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.reload();
+                                }
 
-    //                         });
-    //                     } else {
-    //                         await Swal.fire({
-    //                             icon: "error",
-    //                             title: "Oops...",
-    //                             text: response.message,
-    //                         });
-    //                     }
-    //                 },
-    //                 error: async function(xhr, textStatus, errorThrown) {
-    //                     await Swal.fire({
-    //                         title: 'Oops!',
-    //                         text: `Something went wrong!: ${xhr.status} - ${textStatus}`,
-    //                         icon: 'error',
-    //                         confirmButtonText: 'OK'
-    //                     });
-    //                 }
-    //             });
-    //         } else {
-    //             // User canceled the submission
-    //             Swal.fire({
-    //                 title: "Cancelled!",
-    //                 text: "Your data was not submitted.",
-    //                 icon: "info",
-    //                 confirmButtonText: "OK"
-    //             });
-    //         }
-    //     });
-    // });
+                            });
+                        } else {
+                            await Swal.fire({
+                                icon: "error",
+                                title: "Oops...",
+                                text: response.message,
+                            });
+                        }
+                    },
+                    error: async function(xhr, textStatus, errorThrown) {
+                        await Swal.fire({
+                            title: 'Oops!',
+                            text: `Something went wrong!: ${xhr.status} - ${textStatus}`,
+                            icon: 'error',
+                            confirmButtonText: 'OK'
+                        });
+                    }
+                });
+            } else {
+                // User canceled the submission
+                Swal.fire({
+                    title: "Cancelled!",
+                    text: "Your data was not submitted.",
+                    icon: "info",
+                    confirmButtonText: "OK"
+                });
+            }
+        });
+    });
+
+    //Comment view
+    const comments = JSON.parse(@json($comments));
+    console.log(comments);
+    const commentList = document.getElementById('commentsList');
+    commentList.innerHTML = '';
+    comments.forEach(comment => {
+        commentList.innerHTML +=
+        `
+        <div class="flex flex-col bg-transparent border border-white/70 rounded-xl p-4 shadow-inner backdrop-blur-sm">
+            <p class="text-sm text-gray-200 mb-2">Posted by <span class="font-bold">${comment.user ? comment.user.username : 'Deleted User'}</span> on <span class="italic">${comment.created_at}</span></p>
+            <p class="text-base text-white mb-2">${comment.comment.replace(/\n/g, '<br>')}</p>
+            <div class="flex items-center">
+                <p class="font-semibold text-white mr-2">Rating:</p>
+                <div id="viewRating" class="flex space-x-1">
+                    ${generateStars(comment.rating)}
+                </div>
+            </div>
+        </div>
+        `
+
+    });
+
+    function generateStars(rating) {
+        let stars = '';
+        for (let i = 1; i <= 5; i++) {
+            if (i <= rating) {
+                stars += `<span class="text-[#f1683a] text-lg">★</span>`; // Filled star
+            } else {
+                stars += `<span class="text-gray-400 text-lg">★</span>`; // Empty star
+            }
+        }
+        return stars;
+    }
 </script>
 @endSection
