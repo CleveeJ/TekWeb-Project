@@ -21,13 +21,16 @@
 </style>
 
 <section class="relative h-screen"  id="recommendation">
-    <img src="{{asset('assets/rempah_bg.jpeg')}}" alt="Background" class="absolute top-0 left-0 w-full h-full object-cover">
-    <div class="flex items-center justify-center h-full relative z-10 text-white">
+    <img src="{{asset('assets/rempah_bg.jpeg')}}" alt="Background" class="absolute top-0 left-0 w-full h-screen object-cover">
+    <div class="flex flex-col gap-5 items-center justify-center h-full relative z-10 text-white">
+        <div class="flex items-center justify-center z-10 font-bold text-5xl text-white">
+            Recommendation Of The Day
+        </div>
         <div class="container rounded-xl shadow-lg text-center">
             <div>
                 <img src="{{asset('assets/burger.jpg')}}" alt="recommendation" class="rounded-lg">
             </div>
-            <div class="absolute bottom-0 left-0 right-0 p-4 bg-white bg-opacity-20 backdrop-blur-md text-white rounded-b-xl border border-white/30" id="bodyCard">
+            <div class="absolute w-98 bottom-0 left-0 right-0 p-4 bg-white bg-opacity-20 backdrop-blur-md text-white rounded-b-xl border border-white/30" id="bodyCard">
                 <div class="text-3xl font-bold text-left">Tittle</div>
                 <div class="text-sm text-left">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, voluptatibus. Tempore debitis asperiores in tempora nam amet, commodi, adipisci reprehenderit odit corrupti, qui cum harum aspernatur ipsa. Totam, reprehenderit porro?</div>
                 <div class="buttons grid grid-cols-[repeat(2,_130px)] grid-rows-[40px] gap-[5px] mt-[20px]">
