@@ -18,7 +18,11 @@ class RecipeController extends Controller
 
     public function recipes()
     {
-        $recipes = Recipe::with('user')->get();
+        $recipes = Recipe::with('user')
+            ->leftJoin('comments', 'recipes.id', '=', 'comments.recipe_id')
+            ->select('recipes.id', 'recipes.name', 'recipes.user_id', 'recipes.food_image', \DB::raw('AVG(comments.rating) as average_rating'))
+            ->groupBy('recipes.id', 'recipes.name', 'recipes.user_id', 'recipes.food_image')
+            ->get();
         $data = [];
         foreach ($recipes as $r) {
             $try = [];
@@ -26,6 +30,7 @@ class RecipeController extends Controller
             $try['name'] = $r->name;
             $try['image'] = $r->food_image ? Storage::url($r->food_image) : null; //Belum Storage $r->food_image ? Storage::url($r->food_image) : null,
             $try['user_name'] = $r->user->username;
+            $try['rating'] = $r->average_rating ? $r->average_rating : 0;
             $data[] = $try;
         }
         return view('recipes', [

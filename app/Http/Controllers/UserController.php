@@ -21,20 +21,31 @@ class UserController extends Controller
         $cacheKey = 'recipes_ordered_' . date('Y-m-d');
 
         $recipes = Cache::remember($cacheKey, 24 * 60, function () {
-            return Recipe::with('user')->limit(30)->get(); //blm ada order by rating
+            return $recipes = Recipe::with('user')
+            ->leftJoin('comments', 'recipes.id', '=', 'comments.recipe_id')
+            ->select('recipes.id', 'recipes.name', 'recipes.user_id', 'recipes.food_image', \DB::raw('AVG(comments.rating) as average_rating'))
+            ->groupBy('recipes.id', 'recipes.name', 'recipes.user_id', 'recipes.food_image',)
+            ->having('average_rating', '>', 3)
+            ->limit(100)
+            ->get();
         });
 
         // Set deterministic randomization with today's date
         $seed = intval(hexdec(md5(date('Y-m-d'))));
         mt_srand($seed);
-        $randomIndex = mt_rand(0, $recipes->count() - 1);
-        $randomRecipe = $recipes[$randomIndex];
 
-        $recommend = [];
-        $recommend['id'] = $randomRecipe->id;
-        $recommend['name'] = $randomRecipe->name;
-        $recommend['image'] = $randomRecipe->food_image ? Storage::url($randomRecipe->food_image) : null;
-        $recommend['user_name'] = $randomRecipe->user->username;
+        $recommend = null;
+
+        if ($recipes->isNotEmpty()) {
+            $randomIndex = mt_rand(0, $recipes->count() - 1);
+            $randomRecipe = $recipes[$randomIndex];
+        
+            $recommend = [];
+            $recommend['id'] = $randomRecipe->id;
+            $recommend['name'] = $randomRecipe->name;
+            $recommend['image'] = $randomRecipe->food_image ? Storage::url($randomRecipe->food_image) : null;
+            $recommend['user_name'] = $randomRecipe->user->username;
+        }
         
         return view('homepage', [
             'title' => 'Home',
