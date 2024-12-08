@@ -56,6 +56,12 @@ class RecipeController extends Controller
         if ($data) {
             $data->food_image = Storage::url($data->food_image);
         }
+        $rating = 0;
+        if ($comments->count() > 0) {
+            $totalRating = $comments->sum('rating');
+            $rating = round($totalRating / $comments->count(), 2);
+        }
+        $data->rating = $rating;
         return view('recipeDetail', [
             'title' => $data->name,
             'recipe_id' => $recipe_id,
