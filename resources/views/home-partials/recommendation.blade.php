@@ -27,19 +27,25 @@
         <div class="flex items-center justify-center z-10 font-bold text-5xl text-white">
             Recommendation Of The Day
         </div>
-        <div class="container rounded-xl shadow-lg text-center">
-            <div class="w-full h-full overflow-hidden">
-                <img src="{{$recommend['image']}}" alt="recommendation" class="rounded-lg object-cover w-full h-full">
-            </div>
-            <div class="absolute w-98 bottom-0 left-0 right-0 p-4 bg-white bg-opacity-20 backdrop-blur-md text-white rounded-b-xl border border-white/30" id="bodyCard">
-                <div class="text-3xl font-bold text-left">{{$recommend['name']}}</div>
-                <div class="text-md font-bold text-left">{{$recommend['user_name']}}</div>
-                <div class="text-sm text-left">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, voluptatibus. Tempore debitis asperiores in tempora nam amet, commodi, adipisci reprehenderit odit corrupti</div>
-                <div class="buttons grid grid-cols-[repeat(2,_130px)] grid-rows-[40px] gap-[5px] mt-[20px]">
-                    <button onclick="openDetails(this)" data-href="{{ route('recipe.detail', ['recipe_id' => $recommend['id']]) }}" class="border-[none] bg-[#eee] tracking-[3px] font-[Poppins] font-medium text-black">SEE DETAILS</button>
+        @if($recommend)
+            <div class="container rounded-xl shadow-lg text-center">
+                <div class="w-full h-full overflow-hidden">
+                    <img src="{{$recommend['image']}}" alt="recommendation" class="rounded-lg object-cover w-full h-full">
+                </div>
+                <div class="bodyCard absolute w-98 bottom-0 left-0 right-0 p-4 bg-white bg-opacity-20 backdrop-blur-md text-white rounded-b-xl border border-white/30">
+                    <div class="text-3xl font-bold text-left">{{$recommend['name']}}</div>
+                    <div class="text-md font-bold text-left">{{$recommend['user_name']}}</div>
+                    <div class="text-sm text-left">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, voluptatibus. Tempore debitis asperiores in tempora nam amet, commodi, adipisci reprehenderit odit corrupti</div>
+                    <div class="buttons grid grid-cols-[repeat(2,_130px)] grid-rows-[40px] gap-[5px] mt-[20px]">
+                        <button onclick="openDetails(this)" data-href="{{ route('recipe.detail', ['recipe_id' => $recommend['id']]) }}" class="border-[none] bg-[#eee] tracking-[3px] font-[Poppins] font-medium text-black">SEE DETAILS</button>
+                    </div>
                 </div>
             </div>
-        </div>
+        @else
+            <div class="container rounded-xl shadow-lg text-center flex justify-center items-center bg-black">
+                <div class="w-full bodyCard text-3xl font-bold text-center">There is no recommendation</div>
+            </div>
+        @endif
     </div>
 </section>
 
@@ -68,11 +74,11 @@
         duration: 2
     }, 0);
 
-    tlr.from('#bodyCard', {
+    tlr.from('.bodyCard', {
         display: 'block'
     }, 1);
 
-    tlr.from('#bodyCard', {
+    tlr.from('.bodyCard', {
         opacity: '0'
     }, 2);
 
