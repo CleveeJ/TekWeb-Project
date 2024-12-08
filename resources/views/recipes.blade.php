@@ -65,16 +65,16 @@
         $('#list').html('');
         data.forEach(recipe => {
             $('#list').append(`
-                <div class="card w-full rounded-2xl overflow-hidden p-2 bg-[#f1683a]">
+                <div class="card w-full flex flex-col rounded-2xl overflow-hidden p-2 bg-[#f1683a]" onclick="openDetails('${recipe.id}')">
                     <div class="image w-full aspect-square rounded-2xl overflow-hidden">
                         <img src="${recipe.image}" alt="${recipe.name}" class="w-full h-full object-center object-cover">
                     </div>
-                    <div class="w-full text-lg p-1.5 flex justify-center border-[rgba(255,255,255,0.4)] border-b-[1px] mb-3">
+                    <div class="w-full grow text-lg p-1.5 flex justify-center items-center border-[rgba(255,255,255,0.4)] border-b-[1px] mb-3 text-center">
                         <div>${recipe.name}</div>
                     </div>
                     <div class="flex flex-row space-between text-center">
                         <div class="w-1/2">
-                            Belum User
+                            ${recipe.user_name}
                         </div>
                         <div class="w-1/2 flex flex-row justify-center">
                             <div class="w-[20px] aspect-square text-white">
@@ -106,9 +106,8 @@
     }
 
     display(dataList);
-</script>
-
-<script>
-    
+    function openDetails(id){
+        window.location.href = `{{ route('user.recipes') }}/${id}`;
+    }
 </script>
 @endSection

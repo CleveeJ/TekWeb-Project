@@ -17,14 +17,14 @@ class RecipeController extends Controller
 
     public function recipes()
     {
-        $recipes = Recipe::get(); //Recipe::with('user')->get();
+        $recipes = Recipe::with('user')->get();
         $data = [];
         foreach ($recipes as $r) {
             $try = [];
             $try['id'] = $r->id;
             $try['name'] = $r->name;
             $try['image'] = $r->food_image ? Storage::url($r->food_image) : null; //Belum Storage $r->food_image ? Storage::url($r->food_image) : null,
-            //$try['user_name'] = $r->user->name; //Blm ada user
+            $try['user_name'] = $r->user->username;
             $data[] = $try;
         }
         return view('recipes', [

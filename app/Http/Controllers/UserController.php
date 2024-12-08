@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Recipe;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
@@ -14,8 +16,20 @@ class UserController extends Controller
      */
     public function index()
     {
+        $recipe = Recipe::with('user')->inRandomOrder()->first();
+        if ($recipe) {
+            $recommend = [
+                'id' => $recipe->id,
+                'name' => $recipe->name,
+                'image' => $recipe->food_image ? Storage::url($recipe->food_image) : null,
+                'user_name' => $recipe->user->username,
+            ];
+        } else {
+            $recommend = null;
+        }
         return view('homepage', [
             'title' => 'Home',
+            'recommend' => $recommend,
         ]);
     }
 
