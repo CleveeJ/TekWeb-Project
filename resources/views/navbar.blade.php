@@ -29,9 +29,8 @@
     const menu = document.getElementById('menu');
     toggleBtn.onclick = function () {
         menu.classList.toggle('h-0');
-        menu.classList.toggle('h-[240px]');
 
-        const isOpen = menu.classList.contains('h-[240px]');
+        const isOpen = !menu.classList.contains('h-0');
 
         toggleBtn.innerHTML = "";
         toggleBtn.innerHTML = isOpen 
