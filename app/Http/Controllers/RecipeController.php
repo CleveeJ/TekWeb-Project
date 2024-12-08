@@ -17,7 +17,7 @@ class RecipeController extends Controller
 
     public function recipes()
     {
-        $recipes = Recipe::get(); //Recipe::with('user')->get();
+        $recipes = Recipe::with('user')->get();
         $data = [];
         foreach ($recipes as $r) {
             $try = [];
