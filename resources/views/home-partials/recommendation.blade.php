@@ -36,7 +36,7 @@
                 <div class="text-md font-bold text-left">{{$recommend['user_name']}}</div>
                 <div class="text-sm text-left">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, voluptatibus. Tempore debitis asperiores in tempora nam amet, commodi, adipisci reprehenderit odit corrupti</div>
                 <div class="buttons grid grid-cols-[repeat(2,_130px)] grid-rows-[40px] gap-[5px] mt-[20px]">
-                    <button onclick="openDetails(this)" data-href="{{ route('recipe.detail', ['recipe_id' => $recommend['id']]) }}" class="border-[none] bg-[#eee] tracking-[3px] font-[Poppins] font-medium text-black">SEE MORE</button>
+                    <button onclick="openDetails(this)" data-href="{{ route('recipe.detail', ['recipe_id' => $recommend['id']]) }}" class="border-[none] bg-[#eee] tracking-[3px] font-[Poppins] font-medium text-black">SEE DETAILS</button>
                 </div>
             </div>
         </div>
