@@ -15,7 +15,7 @@ class RecipeMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (session()->has('user')){
+        if (session()->has('email')){
             return $next($request);
         }else {
             return redirect()->route('user.login')->with('error', 'Please Log In First');

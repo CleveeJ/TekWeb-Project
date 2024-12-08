@@ -113,6 +113,7 @@ class UserController extends Controller
             
         // }
         if ($userExist && Hash::check($request->password, $userExist->password)) {
+            session()->put('email', $request->email);
             return redirect()->route('user.home')->with('success', 'Login success');
         }
         return redirect()->back()->with('error', 'Username/Password incorrect');
