@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -45,7 +46,7 @@ class CommentController extends Controller
             'comment'=>$request->comment,
             'rating'=>$request->rating,
             'recipe_id'=>$recipe_id,
-            //'user_id' => nanti kalo dah ada session
+            'user_id' => User::where('email', session('email'))->first()->id,
         ]);
         return response()->json(['success' => true, 'message' => "Success"], 201);
     }
