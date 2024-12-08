@@ -19,6 +19,14 @@
         <div class="flex flex-col ml-0 md:ml-14 p-6 md:p-8 justify-center items-center sm:items-start w-full h-full">
             <h1 id="namaMakanan" class="text-2xl md:text-3xl font-bold my-4">Nama Makanan</h1>
             <p id="pembuat" class="text-lg md:text-xl text-gray-600 mt-4 mb-2">User Name</p>
+            <div class="flex flex-row justify-center sm:justify-start text-xl">
+                <div class="w-[20px] aspect-square text-white">
+                    <i class="fa-regular fa-star" style="color: #f1683a;"></i>
+                </div>
+                <div id="recipeRating" class="px-2 sm:px-6 text-center">
+                    
+                </div>
+            </div>
         </div>
     </div>
 
@@ -110,6 +118,9 @@
     img.alt = data.name;
     document.getElementById('namaMakanan').textContent = data.name;
     document.getElementById('pembuat').textContent = data.user.username;
+
+    //Rating
+    document.getElementById('recipeRating').textContent = data.rating;
 
     //Bahan text
     const listBahan = document.getElementById('listBahan');
