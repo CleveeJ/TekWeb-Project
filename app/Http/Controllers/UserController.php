@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Recipe;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -16,17 +17,25 @@ class UserController extends Controller
      */
     public function index()
     {
-        $recipe = Recipe::with('user')->inRandomOrder()->first();
-        if ($recipe) {
-            $recommend = [
-                'id' => $recipe->id,
-                'name' => $recipe->name,
-                'image' => $recipe->food_image ? Storage::url($recipe->food_image) : null,
-                'user_name' => $recipe->user->username,
-            ];
-        } else {
-            $recommend = null;
-        }
+        // Generate the cache key (unique for each day)
+        $cacheKey = 'recipes_ordered_' . date('Y-m-d');
+
+        $recipes = Cache::remember($cacheKey, 24 * 60, function () {
+            return Recipe::with('user')->limit(30)->get(); //blm ada order by rating
+        });
+
+        // Set deterministic randomization with today's date
+        $seed = intval(hexdec(md5(date('Y-m-d'))));
+        mt_srand($seed);
+        $randomIndex = mt_rand(0, $recipes->count() - 1);
+        $randomRecipe = $recipes[$randomIndex];
+
+        $recommend = [];
+        $recommend['id'] = $randomRecipe->id;
+        $recommend['name'] = $randomRecipe->name;
+        $recommend['image'] = $randomRecipe->food_image ? Storage::url($randomRecipe->food_image) : null;
+        $recommend['user_name'] = $randomRecipe->user->username;
+        
         return view('homepage', [
             'title' => 'Home',
             'recommend' => $recommend,
