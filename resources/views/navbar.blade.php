@@ -7,6 +7,7 @@
             <li><a href="{{ route('user.home') }}#landing">Home</a></li>
             <li><a href="{{ route('user.home') }}#leaderboard">Top 5</a></li>
             <li><a href="{{ route('user.home') }}#recommendation">Recommendation</a></li>
+            <li><a href="{{ route('user.recipes') }}">Recipes</a></li>
         </ul>
         <a href="{{ route('user.login') }}" class="hidden lg:block bg-red-500 text-white px-[1rem] py-[0.5rem] border-none outline-none rounded-[20px] text-[0.8rem] font-bold cursor-pointer">Get Started</a>
         <div id="dropdown" class="font-bold w-[24px] cursor-pointer lg:hidden">
@@ -17,6 +18,7 @@
                 <li class="p-[0.7rem] flex items-center justify-center"><a href="{{ route('user.home') }}#landing">Home</a></li>
                 <li class="p-[0.7rem] flex items-center justify-center"><a href="{{ route('user.home') }}#leaderboard">Top 5</a></li>
                 <li class="p-[0.7rem] flex items-center justify-center"><a href="{{ route('user.home') }}#recommendation">Recommendation</a></li>
+                <li class="p-[0.7rem] flex items-center justify-center"><a href="{{ route('user.recipes') }}">Recipes</a></li>
                 <li class="p-[0.7rem] flex items-center justify-center"><a href="{{ route('user.login') }}" class="w-full flex justify-center bg-red-500 text-white px-[1rem] py-[0.5rem] border-none outline-none rounded-[20px] text-[0.8rem] font-bold cursor-pointer">Get Started</a></li>
             </ul>
         </div>
