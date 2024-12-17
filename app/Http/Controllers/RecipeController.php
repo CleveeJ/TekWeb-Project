@@ -20,7 +20,7 @@ class RecipeController extends Controller
     {
         $recipes = Recipe::with('user')
             ->leftJoin('comments', 'recipes.id', '=', 'comments.recipe_id')
-            ->select('recipes.id', 'recipes.name', 'recipes.user_id', 'recipes.food_image', \DB::raw('AVG(comments.rating) as average_rating'))
+            ->select('recipes.id', 'recipes.name', 'recipes.user_id', 'recipes.food_image', \DB::raw('ROUND(AVG(comments.rating), 2) as average_rating'))
             ->groupBy('recipes.id', 'recipes.name', 'recipes.user_id', 'recipes.food_image')
             ->get();
         $data = [];
