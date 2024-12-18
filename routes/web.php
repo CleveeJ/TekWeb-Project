@@ -10,6 +10,7 @@ use App\Http\Controllers\CommentController;
 
 Route::get('/',  [UserController::class, 'index'])->name('user.home');
 Route::get('/login',  [UserController::class, 'login'])->name('user.login');
+Route::get('/logout', [UserController::class, 'logout'])->name('user.logout');
 Route::post('/signup',  [UserController::class, 'store'])->name('user.signup');
 Route::get('/processLogin',  [UserController::class, 'checkLogin'])->name('user.processLogin');
 Route::get('/form',  [RecipeController::class, 'form'])->name('user.form')->middleware(RecipeMiddleware::class);

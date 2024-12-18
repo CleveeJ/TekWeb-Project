@@ -90,6 +90,18 @@ class UserController extends Controller
         ]);
     }
 
+    public function logout(Request $request)
+    {
+        // Menghapus session email
+        $request->session()->forget('email');
+        
+        // Menjalankan flush untuk menghapus semua data sesi
+        $request->session()->flush();
+        
+        // Redirect ke halaman login atau halaman lain setelah logout
+        return redirect()->route('user.home')->with('success', 'Logout successful');
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -159,6 +171,7 @@ class UserController extends Controller
         }
         return redirect()->back()->with('error', 'Username/Password incorrect');
     }
+
 
     /**
      * Display the specified resource.
