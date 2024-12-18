@@ -8,7 +8,10 @@
             <li><a href="{{ route('user.home') }}#leaderboard">Top 5</a></li>
             <li><a href="{{ route('user.home') }}#recommendation">Recommendation</a></li>
             <li><a href="{{ route('user.recipes') }}">Recipes</a></li>
-            <li><a href="{{ route('user.form') }}">Add New Recipes</a></li>
+            @if(session()->has('email'))
+                <li><a href="{{ route('user.myrecipes') }}">Add New Recipes</a></li>
+                <li><a href="{{ route('user.form') }}">Add New Recipes</a></li>
+            @endif
         </ul>
         @if(session()->has('email'))
             <a href="{{ route('user.logout') }}" class="hidden lg:block bg-red-500 text-white px-[1rem] py-[0.5rem] border-none outline-none rounded-[20px] text-[0.8rem] font-bold cursor-pointer">Logout</a>
@@ -24,8 +27,10 @@
                 <li class="p-[0.7rem] flex items-center justify-center"><a href="{{ route('user.home') }}#leaderboard">Top 5</a></li>
                 <li class="p-[0.7rem] flex items-center justify-center"><a href="{{ route('user.home') }}#recommendation">Recommendation</a></li>
                 <li class="p-[0.7rem] flex items-center justify-center"><a href="{{ route('user.recipes') }}">Recipes</a></li>
-                <li class="p-[0.7rem] flex items-center justify-center"><a href="{{ route('user.form') }}">Add New Recipes</a></li>
+                
                 @if(session()->has('email'))
+                    <li class="p-[0.7rem] flex items-center justify-center"><a href="{{ route('user.form') }}">My Recipes</a></li>
+                    <li class="p-[0.7rem] flex items-center justify-center"><a href="{{ route('user.form') }}">Add New Recipes</a></li>
                     <li class="p-[0.7rem] flex items-center justify-center"><a href="{{ route('user.logout') }}" class="w-full flex justify-center bg-red-500 text-white px-[1rem] py-[0.5rem] border-none outline-none rounded-[20px] text-[0.8rem] font-bold cursor-pointer">Logout</a></li>
                 @else
                     <li class="p-[0.7rem] flex items-center justify-center"><a href="{{ route('user.login') }}" class="w-full flex justify-center bg-red-500 text-white px-[1rem] py-[0.5rem] border-none outline-none rounded-[20px] text-[0.8rem] font-bold cursor-pointer">Get Started</a></li>
