@@ -1,3 +1,32 @@
+<style>
+    ul li a {
+        position: relative;
+        display: inline-block;
+        text-decoration: none;
+        color: inherit;
+        padding: 5px 0;
+        transition: color 0.3s ease; /* Optional color transition */
+    }
+
+    ul li a::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        right: 50%;
+        height: 2px; /* Line thickness */
+        background-color: #f1683a; /* Line color */
+        transition: left 0.3s ease, right 0.3s ease; /* Transition for the line */
+    }
+
+    ul li a:hover::after {
+        left: 0;
+        right: 0;
+    }
+</style>
+
+
+
 <div class="fixed top-0 left-0 w-full z-[2500]">
     <div class="relative w-full h-[60px] max-width-[1200px] mx-0 my-auto flex justify-between items-center py-2 px-[2rem]">
         <div>
@@ -9,8 +38,7 @@
             <li><a href="{{ route('user.home') }}#recommendation">Recommendation</a></li>
             <li><a href="{{ route('user.recipes') }}">Recipes</a></li>
             @if(session()->has('email'))
-                <li><a href="{{ route('user.myrecipes') }}">Add New Recipes</a></li>
-                <li><a href="{{ route('user.form') }}">Add New Recipes</a></li>
+                <li><a href="{{ route('user.myrecipes') }}">My Recipes</a></li>
             @endif
         </ul>
         @if(session()->has('email'))
@@ -30,7 +58,6 @@
                 
                 @if(session()->has('email'))
                     <li class="p-[0.7rem] flex items-center justify-center"><a href="{{ route('user.form') }}">My Recipes</a></li>
-                    <li class="p-[0.7rem] flex items-center justify-center"><a href="{{ route('user.form') }}">Add New Recipes</a></li>
                     <li class="p-[0.7rem] flex items-center justify-center"><a href="{{ route('user.logout') }}" class="w-full flex justify-center bg-red-500 text-white px-[1rem] py-[0.5rem] border-none outline-none rounded-[20px] text-[0.8rem] font-bold cursor-pointer">Logout</a></li>
                 @else
                     <li class="p-[0.7rem] flex items-center justify-center"><a href="{{ route('user.login') }}" class="w-full flex justify-center bg-red-500 text-white px-[1rem] py-[0.5rem] border-none outline-none rounded-[20px] text-[0.8rem] font-bold cursor-pointer">Get Started</a></li>

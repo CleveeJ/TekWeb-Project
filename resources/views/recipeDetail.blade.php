@@ -10,7 +10,7 @@
     <div class="w-full flex flex-row space-between items-center">
         <div class="w-full flex flex-row items-center space-x-2">
         @if($refer !== 'Unknown')
-            <a href="{{ $refer }}" class="text-sm underline hover:text-[#f1683a]">Recipes</a>
+            <a href="{{ $refer }}" class="text-sm underline hover:text-[#f1683a]">{{ $refer == route('user.recipes') ? 'Recipes' : 'My Recipes' }}</a>
         @else
             <a href="{{ route('user.recipes') }}" class="text-sm underline hover:text-[#f1683a]">Recipes</a>
         @endif

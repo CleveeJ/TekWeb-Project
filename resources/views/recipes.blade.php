@@ -8,6 +8,13 @@
         {{ $title }}
     </div>
 
+    @if(request()->is('my-recipes'))
+    <div class="w-full flex justify-start mb-4">
+        <a href="{{ route('user.form') }}" class="bg-[#f1683a] text-white px-6 py-2 rounded-2xl shadow-md hover:bg-red-500">
+            Add New Recipe
+        </a>
+    </div>
+    @endif
 
 
     <div class="inline-block text-gray-500 focus-within:text-black w-full mb-10">

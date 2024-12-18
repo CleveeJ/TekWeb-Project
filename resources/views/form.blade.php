@@ -143,11 +143,11 @@
                             }).then((result) => {
                                 if (result.isConfirmed) {
                                     window.location.href =
-                                        "{{ route('user.form') }}"; //success => refresh page
+                                        "{{ route('user.myrecipes') }}"; //success => refresh page
                                 }
                                 setTimeout(() => {
                                     window.location.href =
-                                        "{{ route('user.form') }}";
+                                        "{{ route('user.myrecipes') }}";
                                 }, 1500);
 
                             });
