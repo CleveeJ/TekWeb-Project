@@ -16,7 +16,10 @@ Route::get('/processLogin',  [UserController::class, 'checkLogin'])->name('user.
 Route::get('/form',  [RecipeController::class, 'form'])->name('user.form')->middleware(RecipeMiddleware::class);
 Route::get('/recipes',  [RecipeController::class, 'recipes'])->name('user.recipes');
 
+Route::get('/my-recipes',  [RecipeController::class, 'myrecipes'])->name('user.myrecipes')->middleware(RecipeMiddleware::class);
+
 Route::post('/form/store', [RecipeController::class, 'store'])->name('recipeForm.store');
 
 Route::get('/recipes/{recipe_id}',  [RecipeController::class, 'recipeDetailIndex'])->name('recipe.detail')->middleware(RecipeMiddleware::class);
 Route::post('/recipes/{recipe_id}', [CommentController::class, 'store'])->name('comment.store');
+Route::delete('/recipes/{recipe_id}', [RecipeController::class, 'delete'])->name('comment.store');

@@ -39,6 +39,32 @@ class RecipeController extends Controller
         ]);
     }
 
+    public function myrecipes()
+    {
+        $recipes = Recipe::with('user')
+            ->leftJoin('comments', 'recipes.id', '=', 'comments.recipe_id')
+            ->select('recipes.id', 'recipes.name', 'recipes.user_id', 'recipes.food_image', \DB::raw('ROUND(AVG(comments.rating), 2) as average_rating'))
+            ->groupBy('recipes.id', 'recipes.name', 'recipes.user_id', 'recipes.food_image')
+            ->whereHas('user', function ($query) {
+                $query->where('email', session('email'));
+            })
+            ->get();
+        $data = [];
+        foreach ($recipes as $r) {
+            $try = [];
+            $try['id'] = $r->id;
+            $try['name'] = $r->name;
+            $try['image'] = $r->food_image ? Storage::url($r->food_image) : null; //Belum Storage $r->food_image ? Storage::url($r->food_image) : null,
+            $try['user_name'] = $r->user->username;
+            $try['rating'] = $r->average_rating ? $r->average_rating : 0;
+            $data[] = $try;
+        }
+        return view('recipes', [
+            'title' => 'My Recipes',
+            'recipes' => $data,
+        ]);
+    }
+
     public function form()
     {
         return view('form', [
@@ -66,13 +92,25 @@ class RecipeController extends Controller
             $totalRating = $comments->sum('rating');
             $rating = round($totalRating / $comments->count(), 2);
         }
+        $referrer = request()->headers->get('referer', 'Unknown');
         $data->rating = $rating;
         return view('recipeDetail', [
             'title' => $data->name,
             'recipe_id' => $recipe_id,
             'data' => json_encode($data),
             'comments' => json_encode($comments),
+            'email' => $data->user->email,
+            'refer' => $referrer,
         ]);
+    }
+
+    public function delete($recipe_id){
+        $recipe = Recipe::findOrFail($recipe_id);
+
+        // Perform deletion
+        $recipe->delete();
+
+        return response()->json(['success' => true, 'message' => 'Recipe deleted successfully!']);
     }
     /**
      * Show the form for creating a new resource.

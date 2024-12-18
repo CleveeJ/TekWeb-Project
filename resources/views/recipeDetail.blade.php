@@ -7,10 +7,19 @@
 @include('navbar')
 <div class="flex flex-col justify-center items-start min-w-full min-h-screen px-5 py-14 md:px-20 md:py-16">
     <!-- Navigation Back -->
-    <div class="w-full flex flex-row items-center space-x-2">
-        <a href="{{ route('user.recipes') }}" class="text-sm underline hover:text-[#f1683a]">Recipes</a>
-        <span class="text-sm">></span>
-        <p class="text-sm">{{$title}}</p>
+    <div class="w-full flex flex-row space-between items-center">
+        <div class="w-full flex flex-row items-center space-x-2">
+        @if($refer !== 'Unknown')
+            <a href="{{ $refer }}" class="text-sm underline hover:text-[#f1683a]">Recipes</a>
+        @else
+            <a href="{{ route('user.recipes') }}" class="text-sm underline hover:text-[#f1683a]">Recipes</a>
+        @endif
+            <span class="text-sm">></span>
+            <p class="text-sm">{{$title}}</p>
+        </div>
+        @if(session('email') == $email)
+            <button type="button" onclick="deleteRecipe()" class="w-[200px] focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete Recipe</button>
+        @endif
     </div>
 
     <!-- Nama Makanan -->
@@ -291,6 +300,74 @@
             }
         }
         return stars;
+    }
+</script>
+
+<script>
+    function deleteRecipe(){
+        const data = JSON.parse(@json($data));
+        var referer = @json($refer);
+        if(referer == "Unknown"){
+            referer = `{{ route('user.recipes') }}`;
+        }
+        Swal.fire({
+            title: "Are you sure want to delete this?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, submit it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: `{{ route('user.recipes') }}/${data.id}`,
+                    type: 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // CSRF token
+                    },
+                    processData: false, //to prevent jQuery from automatically transforming the data into a query string
+                    contentType: false,
+                    success: async function(response) {
+                        if (response.success) {
+                            await Swal.fire({
+                                title: "Success!",
+                                text: response.message,
+                                icon: "success",
+                                confirmButtonColor: "#3085d6",
+                                confirmButtonText: "OK"
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = referer;
+                                }
+                            });
+                        } else {
+                            await Swal.fire({
+                                icon: "error",
+                                title: "Oops...",
+                                text: response.message,
+                            });
+                        }
+                    },
+                    error: async function(xhr, textStatus, errorThrown) {
+                        await Swal.fire({
+                            title: 'Oops!',
+                            text: `Something went wrong!: ${xhr.status} - ${textStatus}`,
+                            icon: 'error',
+                            confirmButtonText: 'OK'
+                        });
+                    }
+                });
+            } else {
+                // User canceled the submission
+                Swal.fire({
+                    title: "Cancelled!",
+                    text: "Your data was not submitted.",
+                    icon: "info",
+                    confirmButtonText: "OK"
+                });
+            }
+        });
     }
 </script>
 @endSection
