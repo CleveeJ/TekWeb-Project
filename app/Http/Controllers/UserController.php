@@ -23,8 +23,8 @@ class UserController extends Controller
         $recipes = Cache::remember($cacheKey, 24 * 60, function () {
             return $recipes = Recipe::with('user')
             ->leftJoin('comments', 'recipes.id', '=', 'comments.recipe_id')
-            ->select('recipes.id', 'recipes.name', 'recipes.user_id', 'recipes.food_image', \DB::raw('AVG(comments.rating) as average_rating'))
-            ->groupBy('recipes.id', 'recipes.name', 'recipes.user_id', 'recipes.food_image',)
+            ->select('recipes.id', 'recipes.name', 'recipes.description', 'recipes.user_id', 'recipes.food_image', \DB::raw('AVG(comments.rating) as average_rating'))
+            ->groupBy('recipes.id', 'recipes.name', 'recipes.description', 'recipes.user_id', 'recipes.food_image',)
             ->having('average_rating', '>', 3)
             ->limit(100)
             ->get();
@@ -43,6 +43,7 @@ class UserController extends Controller
             $recommend = [];
             $recommend['id'] = $randomRecipe->id;
             $recommend['name'] = $randomRecipe->name;
+            $recommend['description'] = $randomRecipe->description;
             $recommend['image'] = $randomRecipe->food_image ? Storage::url($randomRecipe->food_image) : null;
             $recommend['user_name'] = $randomRecipe->user->username;
         }
@@ -52,11 +53,12 @@ class UserController extends Controller
         ->select(
             'recipes.id',
             'recipes.name',
+            'recipes.description',
             'recipes.user_id',
             'recipes.food_image',
             \DB::raw('AVG(comments.rating) as average_rating')
         )
-        ->groupBy('recipes.id', 'recipes.name', 'recipes.user_id', 'recipes.food_image')
+        ->groupBy('recipes.id', 'recipes.name', 'recipes.description', 'recipes.user_id', 'recipes.food_image')
         ->orderByDesc('average_rating')
         ->limit(5)
         ->get();
@@ -69,6 +71,7 @@ class UserController extends Controller
             $data[] = [
                 'id' => $r->id,
                 'name' => $r->name,
+                'description' => $r->description,
                 'image' => $r->food_image ? Storage::url($r->food_image) : null,
                 'user_name' => $r->user->username,
                 'rating' => $r->average_rating ? $r->average_rating : 0,

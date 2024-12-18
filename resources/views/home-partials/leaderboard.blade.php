@@ -166,7 +166,7 @@ a{
                     <div class="title text-[5rem] font-bold leading-[1.3em]">TOP {{ $index + 1 }}</div>
                     <div class="topic text-[5rem] font-bold leading-[1.3em] text-[#f1683a]">{{ $recipe['name'] }}</div>
                     <div class="des">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi, rem magnam nesciunt minima placeat, itaque eum neque officiis unde, eaque optio ratione aliquid assumenda facere ab et quasi ducimus aut.
+                    {{ $recipe['description'] }}
                     </div>
                     <div class="buttons grid grid-cols-[repeat(2,_130px)] grid-rows-[40px] gap-[5px] mt-[20px]">
                         <button onclick="openDetails(this)" data-href="{{ route('recipe.detail', ['recipe_id' => $recipe['id']]) }}" class="border-[none] bg-[#eee] tracking-[3px] font-[Poppins] font-medium text-black">SEE MORE</button>

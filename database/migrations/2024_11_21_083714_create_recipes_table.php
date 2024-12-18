@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('recipes', function (Blueprint $table) {
             $table->uuid('id')->primary(); 
             $table->string('name');
+            $table->longText('description');
             $table->longText('ingredients');
             $table->longText('procedures');
             $table->string('food_image');
-            $table->uuid('user_id')->nullable(); // UBAH KALAU DB USER UDAH ADA
+            $table->uuid('user_id');
 
             $table->timestamps();
             $table->softDeletes();

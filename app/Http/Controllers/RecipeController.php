@@ -89,18 +89,36 @@ class RecipeController extends Controller
     {
         $requestFillable = $request->all();
 
-        //dd($requestFillable);
+        $userEmail = session()->get('email');
 
-        // Check for and store the uploaded files
+        if (!$userEmail) {
+            return response()->json(['success' => false, 'message' => 'User email not found in session.'], 400);
+        }
+
+        $user = \App\Models\User::where('email', $userEmail)->first();
+
+        if (!$user) {
+            return response()->json(['success' => false, 'message' => 'User not found.'], 404);
+        }
+
+        $requestFillable['user_id'] = $user->id;
+
+        // dd($requestFillable['user_id']);
+
         if ($request->hasFile('food_image')) {
             $foodPhoto = $request->file('food_image');
-            $requestFillable['food_image'] = $foodPhoto->storePubliclyAs('uploads', $requestFillable['name'] . '_food_image.' . $foodPhoto->getClientOriginalExtension(), 'public');
+            $requestFillable['food_image'] = $foodPhoto->storePubliclyAs(
+                'uploads',
+                $requestFillable['name'] . '_food_image.' . $foodPhoto->getClientOriginalExtension(),
+                'public'
+            );
         }
 
         $this->modelRecipe->create($requestFillable);
 
         return response()->json(['success' => true, 'message' => 'Recipe added successfully.']);
     }
+
 
     /**
      * Display the specified resource.
