@@ -46,10 +46,40 @@ class UserController extends Controller
             $recommend['image'] = $randomRecipe->food_image ? Storage::url($randomRecipe->food_image) : null;
             $recommend['user_name'] = $randomRecipe->user->username;
         }
+
+        $recipes = Recipe::with('user')
+        ->leftJoin('comments', 'recipes.id', '=', 'comments.recipe_id')
+        ->select(
+            'recipes.id',
+            'recipes.name',
+            'recipes.user_id',
+            'recipes.food_image',
+            \DB::raw('AVG(comments.rating) as average_rating')
+        )
+        ->groupBy('recipes.id', 'recipes.name', 'recipes.user_id', 'recipes.food_image')
+        ->orderByDesc('average_rating')
+        ->limit(5)
+        ->get();
         
+         // Fetch top 5 recipes with the highest average rating from the cached list
+        $topRecipes = $recipes->sortByDesc('average_rating')->take(5);
+
+        $data = [];
+        foreach ($topRecipes as $r) {
+            $data[] = [
+                'id' => $r->id,
+                'name' => $r->name,
+                'image' => $r->food_image ? Storage::url($r->food_image) : null,
+                'user_name' => $r->user->username,
+                'rating' => $r->average_rating ? $r->average_rating : 0,
+            ];
+        }
+
+        // Return the view with both recommendation and top recipes
         return view('homepage', [
             'title' => 'Home',
             'recommend' => $recommend,
+            'leaderboard' => $data,
         ]);
     }
 

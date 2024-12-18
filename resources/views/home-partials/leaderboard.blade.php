@@ -157,117 +157,40 @@ a{
     <div class="carousel h-screen w-full overflow-hidden relative">
         <!-- list item -->
         <div class="list">
+        @foreach ($leaderboard as $index => $recipe)
             <div class="item w-full h-full absolute">
-                <img src="{{asset('assets/burger.jpg')}}" class="w-full h-full object-cover filter brightness-[60%]">
+                <img src="{{ $recipe['image'] ?? asset('assets/default.jpg') }}" 
+                    alt="{{ $recipe['name'] }}" 
+                    class="w-full h-full object-cover filter brightness-[60%]">
                 <div class="texts content absolute top-1/4 w-full max-w-[80%] left-2/4 -translate-x-1/2 pr-[30%] box-border text-[#fff] [text-shadow:0_5px_10px_#0004]">
-                    <div class="author font-bold tracking-[10px]">LUNDEV</div>
-                    <div class="title text-[5rem] font-bold leading-[1.3em]">DESIGN SLIDER</div>
-                    <div class="topic text-[5rem] font-bold leading-[1.3em] text-[#f1683a]">BURGER</div>
+                    <div class="title text-[5rem] font-bold leading-[1.3em]">TOP {{ $index + 1 }}</div>
+                    <div class="topic text-[5rem] font-bold leading-[1.3em] text-[#f1683a]">{{ $recipe['name'] }}</div>
                     <div class="des">
-                        <!-- lorem 50 -->
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi, rem magnam nesciunt minima placeat, itaque eum neque officiis unde, eaque optio ratione aliquid assumenda facere ab et quasi ducimus aut 
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi, rem magnam nesciunt minima placeat, itaque eum neque officiis unde, eaque optio ratione aliquid assumenda facere ab et quasi ducimus aut.
                     </div>
                     <div class="buttons grid grid-cols-[repeat(2,_130px)] grid-rows-[40px] gap-[5px] mt-[20px]">
-                        <button class="border-[none] bg-[#eee] tracking-[3px] font-[Poppins] font-medium text-black">SEE MORE</button>
-                        <button class="border-[none] bg-[#eee] tracking-[3px] font-[Poppins] font-medium bg-transparent border-[1px] border-[solid] border-[#fff] text-[#eee]">SUBSCRIBE</button>
+                        <button onclick="openDetails(this)" data-href="{{ route('recipe.detail', ['recipe_id' => $recipe['id']]) }}" class="border-[none] bg-[#eee] tracking-[3px] font-[Poppins] font-medium text-black">SEE MORE</button>
                     </div>
                 </div>
             </div>
-            <div class="item w-full h-full absolute">
-                <img src="{{asset('assets/pizza.jpg')}}" class="w-full h-full object-cover filter brightness-[60%]">
-                <div class="texts content absolute top-1/4 w-full max-w-[80%] left-2/4 -translate-x-1/2 pr-[30%] box-border text-[#fff] [text-shadow:0_5px_10px_#0004]">
-                    <div class="author font-bold tracking-[10px]">LUNDEV</div>
-                    <div class="title text-[5rem] font-bold leading-[1.3em]">DESIGN SLIDER</div>
-                    <div class="topic text-[5rem] font-bold leading-[1.3em] text-[#f1683a]">PIZZA</div>
-                    <div class="des">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi, rem magnam nesciunt minima placeat, itaque eum neque officiis unde, eaque optio ratione aliquid assumenda facere ab et quasi ducimus aut 
-                    </div>
-                    <div class="buttons grid grid-cols-[repeat(2,_130px)] grid-rows-[40px] gap-[5px] mt-[20px]">
-                        <button class="border-[none] bg-[#eee] tracking-[3px] font-[Poppins] font-medium text-black">SEE MORE</button>
-                        <button class="border-[none] bg-[#eee] tracking-[3px] font-[Poppins] font-medium bg-transparent border-[1px] border-[solid] border-[#fff] text-[#eee]">SUBSCRIBE</button>
-                    </div>
-                </div>
-            </div>
-            <div class="item w-full h-full absolute">
-                <img src="{{asset('assets/pie.jpg')}}" class="w-full h-full object-cover filter brightness-[60%]">
-                <div class="texts content absolute top-1/4 w-full max-w-[80%] left-2/4 -translate-x-1/2 pr-[30%] box-border text-[#fff] [text-shadow:0_5px_10px_#0004]">
-                    <div class="author font-bold tracking-[10px]">LUNDEV</div>
-                    <div class="title text-[5rem] font-bold leading-[1.3em]">DESIGN SLIDER</div>
-                    <div class="topic text-[5rem] font-bold leading-[1.3em] text-[#f1683a]">PIE</div>
-                    <div class="des">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi, rem magnam nesciunt minima placeat, itaque eum neque officiis unde, eaque optio ratione aliquid assumenda facere ab et quasi ducimus aut 
-                    </div>
-                    <div class="buttons grid grid-cols-[repeat(2,_130px)] grid-rows-[40px] gap-[5px] mt-[20px]">
-                        <button class="border-[none] bg-[#eee] tracking-[3px] font-[Poppins] font-medium text-black">SEE MORE</button>
-                        <button class="border-[none] bg-[#eee] tracking-[3px] font-[Poppins] font-medium bg-transparent border-[1px] border-[solid] border-[#fff] text-[#eee]">SUBSCRIBE</button>
-                    </div>
-                </div>
-            </div>
-            <div class="item w-full h-full absolute">
-                <img src="{{asset('assets/burger.jpg')}}" class="w-full h-full object-cover filter brightness-[60%]">
-                <div class="texts content absolute top-1/4 w-full max-w-[80%] left-2/4 -translate-x-1/2 pr-[30%] box-border text-[#fff] [text-shadow:0_5px_10px_#0004]">
-                    <div class="author font-bold tracking-[10px]">LUNDEV</div>
-                    <div class="title text-[5rem] font-bold leading-[1.3em]">DESIGN SLIDER</div>
-                    <div class="topic text-[5rem] font-bold leading-[1.3em] text-[#f1683a]">ANIMAL</div>
-                    <div class="des">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi, rem magnam nesciunt minima placeat, itaque eum neque officiis unde, eaque optio ratione aliquid assumenda facere ab et quasi ducimus aut 
-                    </div>
-                    <div class="buttons grid grid-cols-[repeat(2,_130px)] grid-rows-[40px] gap-[5px] mt-[20px]">
-                        <button class="border-[none] bg-[#eee] tracking-[3px] font-[Poppins] font-medium text-black">SEE MORE</button>
-                        <button class="border-[none] bg-[#eee] tracking-[3px] font-[Poppins] font-medium bg-transparent border-[1px] border-[solid] border-[#fff] text-[#eee]">SUBSCRIBE</button>
-                    </div>
-                </div>
-            </div>
+        @endforeach
         </div>
-        <!-- list thumnail -->
-        <div class="thumbnail absolute bottom-[50px] w-max flex gap-[20px] z-50">
-            <div class="item w-[100px] h-[150px] flex-shrink-0 relative">
-                <img class="w-full h-full object-cover rounded-[20px] filter brightness-[60%]" src="{{asset('assets/burger.jpg')}}">
-                <div class="content text-[#fff] absolute bottom-[10px] left-[10px] right-[10px]">
-                    <div class="title font-medium">
-                        Name Slider
-                    </div>
-                    <div class="description font-light">
-                        Description
-                    </div>
-                </div>
-            </div>
-            <div class="item w-[100px] h-[150px] flex-shrink-0 relative">
-                <img class="w-full h-full object-cover rounded-[20px] filter brightness-[60%]" src="{{asset('assets/pizza.jpg')}}">
-                <div class="content text-[#fff] absolute bottom-[10px] left-[10px] right-[10px]">
-                    <div class="title font-medium">
-                        Name Slider
-                    </div>
-                    <div class="description font-light">
-                        Description
-                    </div>
-                </div>
-            </div>
-            <div class="item w-[100px] h-[150px] flex-shrink-0 relative">
-                <img class="w-full h-full object-cover rounded-[20px] filter brightness-[60%]" src="{{asset('assets/pie.jpg')}}">
-                <div class="content text-[#fff] absolute bottom-[10px] left-[10px] right-[10px]">
-                    <div class="title font-medium">
-                        Name Slider
-                    </div>
-                    <div class="description font-light">
-                        Description
-                    </div>
-                </div>
-            </div>
-            <div class="item w-[100px] h-[150px] flex-shrink-0 relative">
-                <img class="w-full h-full object-cover rounded-[20px] filter brightness-[60%]" src="{{asset('assets/burger.jpg')}}">
-                <div class="content text-[#fff] absolute bottom-[10px] left-[10px] right-[10px]">
-                    <div class="title font-medium">
-                        Name Slider
-                    </div>
-                    <div class="description font-light">
-                        Description
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- next prev -->
 
+        <!-- Thumbnail Section -->
+        <div class="thumbnail absolute bottom-[50px] w-max flex gap-[20px] z-50">
+            @foreach ($leaderboard as $recipe)
+                <div class="item w-[100px] h-[150px] flex-shrink-0 relative">
+                    <img class="w-full h-full object-cover rounded-[20px] filter brightness-[60%]" 
+                        src="{{ $recipe['image'] ?? asset('assets/default.jpg') }}" 
+                        alt="{{ $recipe['name'] }}">
+                    <div class="content text-[#fff] absolute bottom-[10px] left-[10px] right-[10px]">
+                        <div class="title font-medium">
+                            {{ $recipe['name'] }}
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
 
         <div class="arrows absolute top-[80%] right-[52%] w-[300px] max-w-[30%] flex gap-[10px] items-center z-50">
             <button class="w-[40px] h-[40px] rounded-[50%] border-[none] text-[#fff] font-[monospace] font-bold [transition:.5s] bg-yellow-600 border border-white hover:bg-[#fff] hover:text-[#000]" id="prev"><</button>
@@ -341,5 +264,10 @@ a{
             carouselDom.classList.remove('next');
             carouselDom.classList.remove('prev');
         }, 700);
+    }
+
+    function openDetails(button){
+        const url = button.getAttribute('data-href');
+        window.location.href = url;
     }
 </script>

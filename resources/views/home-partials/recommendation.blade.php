@@ -34,7 +34,7 @@
                 </div>
                 <div class="bodyCard absolute w-98 bottom-0 left-0 right-0 p-4 bg-white bg-opacity-20 backdrop-blur-md text-white rounded-b-xl border border-white/30">
                     <div class="text-3xl font-bold text-left">{{$recommend['name']}}</div>
-                    <div class="text-md font-bold text-left">{{$recommend['user_name']}}</div>
+                    <div class="text-md font-bold text-left">By {{$recommend['user_name']}}</div>
                     <div class="text-sm text-left">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, voluptatibus. Tempore debitis asperiores in tempora nam amet, commodi, adipisci reprehenderit odit corrupti</div>
                     <div class="buttons grid grid-cols-[repeat(2,_130px)] grid-rows-[40px] gap-[5px] mt-[20px]">
                         <button onclick="openDetails(this)" data-href="{{ route('recipe.detail', ['recipe_id' => $recommend['id']]) }}" class="border-[none] bg-[#eee] tracking-[3px] font-[Poppins] font-medium text-black">SEE DETAILS</button>
